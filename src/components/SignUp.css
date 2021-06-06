@@ -1,0 +1,45 @@
+body {
+    background-color: #282c34;
+    color: white;
+    padding: 40px;
+    font-family: Arial;
+    text-align: center;
+  }
+h1{
+    font-size: 500%;
+}  
+label{
+    font-size: 200%;
+}
+input{
+    height: 40px;
+    font-size: large;
+    font-family: 'Times New Roman', Times, serif;
+    padding-left: 10px;
+}
+a:link{
+    color: white;
+}
+a:hover{
+    color: white;
+}
+a:active{
+    color: white;
+}
+a:visited{
+    color: white;
+}
+
+button{
+    color:darkblue;
+    background-color: white;
+    font-size: x-large;
+    margin: 30px;
+    padding: 10px;
+    min-width: 300;
+    padding-left: 20px;
+    padding-right: 20px;
+    border-radius: 20px;
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: normal;
+}
