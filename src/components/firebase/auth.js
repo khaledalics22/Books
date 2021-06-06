@@ -9,7 +9,6 @@ export const  AuthProvider = ({children})=>{
 
     useEffect(()=>{
          app.auth().onAuthStateChanged(setCurrentUser); 
-
     },[]);
     return (
         <AuthConext.Provider
