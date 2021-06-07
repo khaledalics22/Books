@@ -3,19 +3,16 @@ body {
     color: white;
     padding: 40px;
     font-family: Arial;
-    text-align: center;
   }
-h1{
-    font-size: 500%;
-}  
-label{
+.labelSignUp{
     font-size: 200%;
+    display: block;
 }
-input{
+.inputSignUp{
+    display: block;
     height: 40px;
     font-size: large;
     font-family: 'Times New Roman', Times, serif;
-    padding-left: 10px;
 }
 a:link{
     color: white;
@@ -30,7 +27,11 @@ a:visited{
     color: white;
 }
 
-button{
+.signFormStyle{
+    text-align: center;
+}
+.buttonSignUp{
+    display: block;
     color:darkblue;
     background-color: white;
     font-size: x-large;

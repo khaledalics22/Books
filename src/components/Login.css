@@ -4,18 +4,20 @@ body {
   padding: 40px;
   font-family: Arial;
   text-align: center;
-}
-h1{
-  font-size: 500%;
-}  
-label{
+} 
+.labelLoign{
   font-size: 200%;
+  display: block;
 }
-input{
+.inputLogin{
   height: 40px;
   font-size: large;
   font-family: 'Times New Roman', Times, serif;
   padding-left: 10px;
+  display: block
+}
+.formLogin{
+  text-align: center;
 }
 a:link{
   color: white;
@@ -30,7 +32,8 @@ a:visited{
   color: white;
 }
 
-button{
+.buttonLogin{
+  display: block;
   color:darkblue;
   background-color: white;
   font-size: x-large;

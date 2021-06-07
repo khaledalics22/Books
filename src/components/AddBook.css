@@ -4,35 +4,19 @@ body {
     padding: 40px;
     font-family: Arial;
     text-align: center;
-  }
-h1{
-    font-size: 500%;
-}  
-label{
-    font-size: 200%;
+  }  
+.labelAddBook{
+    font-size: xx-large;
+    display: block;
 }
-.a {
-    text-align: justify;  /* For Edge */
-    text-align-last: center;
-  
-}
-.c {
-    text-align: justify;  /* For Edge */
-    text-align-last: center;
-   height: 40px;
-}
-.b {
-    text-align: justify;  /* For Edge */
-    text-align-last: center;
-}
-
-input{
+.inputAddBook{
     height: 40px;
     font-size: large;
     font-family: 'Times New Roman', Times, serif;
     padding-left: 10px;
     width: 800px;
     text-align-last: left;
+    display: block;
 }
 a:link{
     color: white;
@@ -47,7 +31,8 @@ a:visited{
     color: white;
 }
 
-button{
+.buttonAddBook{
+    display: block;
     color:darkblue;
     background-color: white;
     font-size: x-large;

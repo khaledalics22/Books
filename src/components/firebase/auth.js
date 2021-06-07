@@ -12,7 +12,7 @@ export const  AuthProvider = ({children})=>{
     },[]);
     return (
         <AuthConext.Provider
-        value = {{currentUser}}
+         value = {{currentUser}}
         >{children}</AuthConext.Provider>
     );
 };

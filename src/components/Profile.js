@@ -1,44 +1,47 @@
 import React, { useContext, useEffect, useState } from 'react'; 
 import app from "./firebase/base.js";
-import logo from '../logo.svg'
 import './Profile.css'
-import me from '../me.jpg'
 import { AuthConext } from './firebase/auth.js';
-import GridList from '@material-ui/core/GridList';
+import { GridListTile, GridListTileBar,IconButton ,GridList ,Divider, Container, colors} from '@material-ui/core';
+import Rating from 'react-rating';
+import ReactRoundedImage from "react-rounded-image";
 
 
-
-
-export  default function Profile({ history }){
+export default function Profile({ history}){
     const db = app.firestore();
     const {currentUser} = useContext(AuthConext);
-    const [user,setUserName] = useState(); 
+    const [user ,setUser ] = useState(); 
+
     const getUser = async() =>{
         try {
-        const data = await db.collection('user').doc('tKJvbIdlmr9Z4AUfUgCO').get('name');
-        setUserName(data.data());
+        db.collection('user').doc(currentUser.uid).get().then((doc)=>{
+            if(doc.exists){
+                setUser(doc.data());
+            }
+        });
+       
     } catch {
        alert('something went wrong!');
       }
     };
-
     const [booksResponse,setListOfBooks] = useState(); 
     const getBooks = async ()=> {
-            db.collection('book').where('publisher_id','==',currentUser.uid).get()
+            db.collection('book').where('publisher_id','==',currentUser?.uid).get()
             .then(function(result){
             const books = []; 
                result.forEach(doc => {
                    books.push({title:doc.data()?.title
-                    ,desc:doc.data()?.description,
-                    authorName:doc.data()?.author_name,
-                    category:doc.data()?.category});
+                    ,description:doc.data()?.description,
+                    author_name:doc.data()?.author_name,
+                    category:doc.data()?.category,
+                    cover_url:doc.data()?.cover_url,
+                    rating:doc.data()?.rating});
                });
                 setListOfBooks(books);
             }).catch(function(error){
                 alert(error);
             }
         );
-        
     }
     useEffect(()=>{
         getUser();
@@ -46,38 +49,39 @@ export  default function Profile({ history }){
     },[])
     return (
         <render > 
-            <div className='wrap'>
-                <img  className='profile_img' src={me} onClick={()=>{
-                        history.push('/profile')
-                    }}/> 
-                <body>
-                <div className='username'>
-                    <b  style={{margin:'7px',fontSize:'30px'}}>{user&&user?.name}</b>
-                </div>
-                <div className='useremail'>
-                    <b  style={{margin:'7px'}}>{currentUser.email}</b>
-                </div>
-                </body>
+            <div>
+             <ReactRoundedImage
+                    image={user?.picture_url}
+                    roundedColor="#66A5CC"
+                    roundedSize="8"
+                    borderRadius="100"
+                   >
+            </ReactRoundedImage>
+            <h2 className="username">{user&&user?.name}</h2>
+            <h3 className="useremail">{user?.email}</h3>
             </div>
-
-            <div className='username'>
-                <body>
-                    <button onClick={()=>{
+           <h2 >Books</h2>
+           <button className="buttonAddBookAction"  onClick={()=>{
                        history.push('/add-book') 
-                    }}>Add Book</button>
-                    <button >Reviews</button>
-                </body>
-           </div>
-           {/* <div>
-           <GridList cellHeight={160} className={classes.gridList} cols={4}>
-                {books.map((tile) => (
-                    <GridListTile  title={tile.title}>
-                    <img src={tile.img} alt={tile.title} />
-                    </GridListTile>
-                ))}
-                </GridList>
-           </div> */}
+                    }}>+</button>
+            <div required={booksResponse!=null&&booksResponse?.length>0}>
+           <Divider style={{backgroundColor:'white', height:'1px'}} />
+           <GridList cellHeight="auto" maxWidth="200px" spacing="0px" cols={4} style={{textAlign:'left', textAlignLast:'left'}}>
+                  {booksResponse?.map((book) => (
+                  <div className='itemContainer'>
+                    <img src={book.cover_url} className="bookCover"/>
+                    <p className="bookTileData" style={{fontSize:"22px"}}>{book.title}</p>
+                    <p className="bookTileData" style={{color:'gray'}}>Category: {book.category}</p>
+                    <p className="bookTileData" style={{color:'gray'}}>Author: {book.author_name}</p>
+                    <p className="bookTileData" style={{color:'gray'}}>{book.description}</p> 
+                     <Rating initialRating={`${book?.rating}`} emptySymbol={<Container style={{backgroundColor:"white"}}></Container>} /> 
+               </div>
+            ))}
+           </GridList >
+           <Divider style={{backgroundColor:'white', height:'1px'}}/>
+           </div>   
         </render>
         
     );
 }
+
