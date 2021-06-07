@@ -47,18 +47,21 @@ const AddBook = ({ history })=>{
     return (
         <render >
             <h1 name='addbook' >Add New Book</h1>
-            <form onSubmit={handleAddBook}>
-                <label className="labelAddBook">Book title</label> 
-                <input className="inputAddBook" name="title" type="label" placeholder="Book Title" />
-                <label className="labelAddBook"> Author Name  </label> 
-                <input className="inputAddBook" name="authoerName" type="label" placeholder="Author Name" />
-                <label className="labelAddBook"> category </label> 
-                <input className="inputAddBook" name="category" type="label" placeholder="Category" /> 
-                <label className="labelAddBook"> description </label> 
-                <input className="inputAddBook" name="description" type="label" placeholder="Description" /> 
-                <input className="inputAddBook" type="file" id="file" onChange={handleChange} /> <p></p>
-                <button className="buttonAddBook" type="submit">Add</button>
-            </form>
+            <div class="container">
+                <form style={{display:'inline-block'}} onSubmit={handleAddBook}>
+                    <label className="labelAddBook">Book title</label> 
+                    <input className="inputAddBook" name="title" type="label" placeholder="Book Title" />
+                    <label className="labelAddBook"> Author Name  </label> 
+                    <input className="inputAddBook" name="authoerName" type="label" placeholder="Author Name" />
+                    <label className="labelAddBook"> category </label> 
+                    <input className="inputAddBook" name="category" type="label" placeholder="Category" /> 
+                    <label className="labelAddBook"> description </label> 
+                    <input className="inputAddBook" name="description" type="label" placeholder="Description" /> 
+                    <label className="labelAddBook"> Book Cover </label> 
+                    <input className="inputFile" type="file" id="file" onChange={handleChange} />
+                    <button className="buttonAddBook" type="submit">Add</button><br/>
+                </form>
+            </div>
         </render>
         
     );

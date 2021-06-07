@@ -6,15 +6,30 @@ body {
     text-align: center;
   }  
 .labelAddBook{
-    font-size: xx-large;
+    font-size: large;
     display: block;
+    margin: 7px;
 }
+
+.container {
+    width: auto;
+    clear: both;
+    
+  }
+  
+.container input {
+    width: 100%;
+    clear: both;
+    
+  }
 .inputAddBook{
     height: 40px;
     font-size: large;
     font-family: 'Times New Roman', Times, serif;
     padding-left: 10px;
-    width: 800px;
+    width: 200px;
+    margin-top: 15px;
+    margin-bottom: 15px;
     text-align-last: left;
     display: block;
 }
@@ -30,13 +45,15 @@ a:active{
 a:visited{
     color: white;
 }
-
+.inputFile{
+    margin: 15px;
+}
 .buttonAddBook{
-    display: block;
     color:darkblue;
     background-color: white;
     font-size: x-large;
-    margin: 30px;
+    margin-top: 15px;
+    margin-bottom: 15px;
     padding: 10px;
     width: 200px;
     min-width: 300;

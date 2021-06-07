@@ -48,14 +48,19 @@ body {
   grid-column: auto;
 
 }
+.profileHeaders{
+  text-align-last: left;
+}
 .buttonAddBookAction{
-  display: block;
-  float: right;
+  display: inline;
   width: 40px;
   height: 40px;
-  text-align: center;
   font-size: x-large;
   border-radius: 25px;
+}
+.no_books{
+  text-align-last: center;
+  color: gray;
 }
 .bookCover{
   width:300px;

@@ -5,19 +5,29 @@ body {
   font-family: Arial;
   text-align: center;
 } 
-.labelLoign{
-  font-size: 200%;
+.labelLogin{
+  font-size: x-large;
   display: block;
+  margin: 15px;
 }
+
+.container2 {
+  width: auto;
+  clear: both;
+  
+}
+
+.container2 input {
+  width: 100%;
+  clear: both;
+  
+}
+
 .inputLogin{
+  display: block;
   height: 40px;
   font-size: large;
   font-family: 'Times New Roman', Times, serif;
-  padding-left: 10px;
-  display: block
-}
-.formLogin{
-  text-align: center;
 }
 a:link{
   color: white;
@@ -33,12 +43,13 @@ a:visited{
 }
 
 .buttonLogin{
-  display: block;
   color:darkblue;
   background-color: white;
   font-size: x-large;
-  margin: 30px;
+  margin-top: 15px;
+  margin-bottom: 15px;
   padding: 10px;
+  width: 200px;
   min-width: 300;
   padding-left: 20px;
   padding-right: 20px;

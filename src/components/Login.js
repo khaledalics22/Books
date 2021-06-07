@@ -29,17 +29,19 @@ const Login = ({ history }) => {
   }
 
   return (
-    <div className="formLogin" >
-      <h1>Log in</h1>
-      <form  onSubmit={handleLogin}>
-        <label className="labelLogin">Email</label>
-        <input className="inputLogin" name="email" type="email" placeholder="Email" />
-        <label className="labelLogin">Password</label>
-        <input className="inputLogin" name="password" type="password" placeholder="Password" />
-        <button className="buttonLogin" type="submit">Log in</button>
-        <Link to='/signup'>Don't have Email? Sign Up!</Link>
-      </form>
-    </div>
+    <render >
+        <h6 name='login' style={{fontSize:'xx-large'}}>Login</h6>
+        <div class="container2">
+            <form style={{display:'inline-block'}} onSubmit={handleLogin}>
+                <label className="labelLogin"> Email </label> 
+                <input className="inputLogin" name="email" type="label" placeholder="Email" /> 
+                <label className="labelLogin"> Password </label> 
+                <input className="inputLogin" name="password" type="password" placeholder="Password" /> 
+                <button className="buttonLogin" type="submit">Login</button><br/>
+                <Link to="/signup">Don't have email? SignUP!</Link>
+            </form>
+        </div>
+    </render>
   );
 };
 
