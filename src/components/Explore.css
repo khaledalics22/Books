@@ -1,0 +1,39 @@
+.categoriesContainer {
+  width: 20%;
+  background-color: AliceBlue;
+  position: fixed;
+  height: auto;
+  right: 0;
+  margin: 10%;
+}
+.categoryLink {
+  color: gray;
+  text-decoration: none;
+  display: inline-block;
+  width: 50%;
+}
+.categoryLink:hover {
+  color: blue;
+  text-decoration: underline;
+}
+
+.booksContainer {
+  width: 80%;
+  float: left;
+  margin: 5%;
+}
+
+.book-img {
+  display: block;
+  width: 15rem;
+  padding: 10% 10% 10% 10%;
+}
+.checkBoxes {
+  width: 20%;
+  background-color: AliceBlue;
+  position: fixed;
+  height: auto;
+  left: 0;
+  margin-top: 10%;
+  margin-left: 5%;
+}
