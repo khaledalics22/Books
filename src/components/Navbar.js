@@ -3,6 +3,8 @@ import {Link } from "react-router-dom";
 import app from "./firebase/base.js";
 import "./Navbar.css";
 import me from "../me.jpg"
+import ReactRoundedImage from "react-rounded-image";
+import temp from "../user-circle-solid.svg"
 
 const Navbar = ({history, currentUser}, ...props) => {
     const dropdownRef = useRef(null);
@@ -56,11 +58,11 @@ const Navbar = ({history, currentUser}, ...props) => {
             </div>
             
             <div className="menu-container">
-                <img className='user-image-nav' src={me} onClick={() => setShowImageList(!showImageList)}></img>
                 
+                <img  className='user-image-nav' src={currentUser?currentUser.picture_url:temp} onClick={() => setShowImageList(!showImageList)}></img>
                 <div ref={dropdownRef} className={`menu ${showImageList? 'active' : 'inactive'}`}>
                     <ul>
-                        <li><div className="username-menu">Islam Ahmed</div></li>
+                        <li><div className="username-menu">{currentUser?.name}</div></li>
                         <li><Link to="/profile" className="profile-menu">Profile</Link></li>
                         <li><Link onClick={handleLogOut}>Log Out</Link></li>
                     </ul>
