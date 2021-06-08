@@ -13,6 +13,7 @@ import {
 } from "@material-ui/core";
 import Rating from "react-rating";
 import ReactRoundedImage from "react-rounded-image";
+import Navbar from "./Navbar";
 
 function getBooksView(booksArray) {
   if (booksArray != null && booksArray?.length > 0) {
@@ -171,8 +172,11 @@ export default function Profile({ history }) {
 
   return (
     <render>
-      <body className="profileBody">
-        <div>
+      
+      <Navbar history={history} currentUser={currentUser}/>
+      <div>
+        <body className="profileBody">
+          <br/>
           <ReactRoundedImage
             image={user && user.picture_url}
             roundedColor="#66A5CC"
@@ -180,18 +184,19 @@ export default function Profile({ history }) {
             borderRadius="100"
           ></ReactRoundedImage>
           <h2 className="username">{user && user?.name}</h2>
-          <h3 className="useremail">{user?.email}</h3>
-          <h3 className="useremail">
+          <h5 className="useremail">{user?.email}</h5>
+          <h5 className="useremail">
             {" > "}
             {user?.user_type}
-          </h3>
-        </div>
+          </h5>
+       
         {publishedBooks}
         <h2 className="profileHeaders">Liked Books</h2>
         {likedBooks}
         <h2 className="profileHeaders">Currently Reading</h2>
         {currReadingBooks}
       </body>
+      </div>
     </render>
   );
 }

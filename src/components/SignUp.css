@@ -61,6 +61,10 @@ a.signUpLink:visited{
     color: white;
 }
 
+.radio-label{
+    margin: 7px;
+}
+
 .buttonSignUp{
     color:darkblue;
     background-color: white;

@@ -44,7 +44,8 @@ const SignUp = ({ history }) => {
           // console.log(user.uid);
           // alert('add user data'+user); 
           await db.collection('user').doc(user.uid)
-          .set({name: name.value,email:email.value, picture_url:url,user_type:userType}); 
+          .set({name: name.value,email:email.value, picture_url:url,user_type:userType,
+            liked_books:[],currently_raeding:[]}); 
           history.push("/");
         });
      });
@@ -64,12 +65,12 @@ const SignUp = ({ history }) => {
                   <input className="inputSignUp" name="password" type="password" placeholder="Password" /> 
                   <label className="labelSignUp">Choose Image</label>
                   <input className="inputFile" type="file" id="file" onChange={handleChange} />
-                  <label className="labelSignUp" >user type</label>
+                  <label className="labelSignUp" >User type</label>
                   <div onChange={(event)=>{  setUserType(event.target.value); }}>
                     <form>
-                      <label class="radio-inline" for="author">  
+                      <label class="radio-inline" className='radio-label' for="author">  
                       <input type="radio" id="author" value="author" name="gender"/>Author</label>
-                      <label class="radio-inline" for="reader" >
+                      <label class="radio-inline" className='radio-label' for="reader" >
                       <input type="radio" id="reader" value="reader" name="gender" />Reader</label>
                     </form>
                   </div>
