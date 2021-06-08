@@ -17,6 +17,16 @@ const BookReview = ({ history }) => {
 
   useEffect(() => {
     db.collection("book")
+      .get()
+      .then((book) => {
+        book.forEach((b) => {
+          console.log(b.data());
+        });
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+    db.collection("book")
       .doc(bookId)
       .get()
       .then((book) => {
