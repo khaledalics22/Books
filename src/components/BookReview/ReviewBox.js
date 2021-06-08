@@ -4,55 +4,45 @@ import app from "../firebase/base.js";
 
 const db = app.firestore();
 
-const ReviewBox = ({ book }) => {
+const ReviewBox = (props) => {
+  const { bookId } = props;
   const { currentUser } = useContext(AuthConext);
 
   const addReview = (e) => {
     e.preventDefault();
     const review = e.target.elements.review.value.trim();
-    const name = e.target.elements.name.value.trim();
-    if (name && review) {
+    if (review) {
       const reviewObject = {
-        book_id: book.id,
+        book_id: bookId,
         user_id: currentUser.uid,
         content: review,
       };
+      console.log(reviewObject);
       db.collection("review").doc().set(reviewObject);
-      e.target.elements.comment.value = "";
-      e.target.elements.name.value = "";
+      e.target.elements.review.value = "";
     }
   };
 
   return (
-    <div>
-      <h1 className="title">Write a review</h1>
-      <form onSubmit={addReview}>
-        <div className="field">
-          <div className="control">
-            <input
-              type="text"
-              className="input"
-              name="name"
-              placeholder="Your name"
-            />
-          </div>
+    currentUser && (
+      <form onSubmit={addReview} className="review-form">
+        <div className="form-group review-input">
+          <label for="addReview" className="review-label">
+            Add a review
+          </label>
+          <input
+            type="text"
+            className="form-control review-text"
+            id="addReview"
+            name="review"
+            placeholder="Add a review"
+          />
         </div>
-        <div className="field">
-          <div className="control">
-            <textarea
-              className="textarea"
-              name="review"
-              placeholder="Add a review"
-            ></textarea>
-          </div>
-        </div>
-        <div className="field">
-          <div className="control">
-            <button className="button is-primary">Submit</button>
-          </div>
-        </div>
+        <button type="submit" className="btn btn-primary review-submit">
+          Submit
+        </button>
       </form>
-    </div>
+    )
   );
 };
 

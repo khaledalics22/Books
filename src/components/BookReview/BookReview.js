@@ -20,6 +20,7 @@ const BookReview = ({ history }) => {
       .doc(bookId)
       .get()
       .then((book) => {
+        console.log(book.data());
         setBook(book.data());
       })
       .catch((err) => {
@@ -27,6 +28,7 @@ const BookReview = ({ history }) => {
       });
 
     db.collection("review")
+      .where("book_id", "==", bookId)
       .get()
       .then((reviews) => {
         let result = [];
@@ -41,13 +43,7 @@ const BookReview = ({ history }) => {
       .catch((err) => {
         console.error(err);
       });
-    // lC9x9Ib4S4NHj0o1fQgoiQTpEkP2
-    // db.collection("review").doc().set({
-    //     user_id: "lC9x9Ib4S4NHj0o1fQgoiQTpEkP2",
-    //     book_id: bookId,
-    //     content: "This is a powerful, life-changing book. It is a fluid mixture of entertaining narrative, heart-breaking details about the treatment of chimpanzees in laboratories, and engaging discourse about evolutionary theory, the development of language in chimps and humans, etc."
-    // });
-  }, []);
+  }, [bookId]);
   return (
     <>
       <Navbar history={history} currentUser={currentUser} />
@@ -64,6 +60,7 @@ const BookReview = ({ history }) => {
         </div>
       </div>
       <div>
+        <ReviewBox bookId={bookId} />
         {reviews.map((review, index) => {
           return <Review key={index} review={review} />;
         })}

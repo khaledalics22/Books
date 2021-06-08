@@ -80,7 +80,7 @@
   justify-content: center;
   align-items: center;
   width: 70%;
-  background: black;
+  background: #282c34;
   border: 1px solid gray;
   border-radius: 1.5rem;
   box-shadow: 0 4px 8px 0 rgb(1 1 1 / 20%), 0 6px 20px 0 rgb(1 1 1 / 19%);
@@ -92,4 +92,29 @@
 
 .review-content {
   width: 60%;
+}
+
+.review-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.review-input {
+  width: 60%;
+}
+
+.review-label,
+.review-text,
+.review-submit {
+  margin: 1rem 1rem 0 0;
+}
+.review-label {
+  color: lightgreen;
+  font-weight: bold;
+  font-size: 2vw;
+}
+.review-submit {
+  width: 15%;
 }
