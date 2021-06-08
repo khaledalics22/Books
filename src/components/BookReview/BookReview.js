@@ -3,7 +3,6 @@ import { withRouter, useParams } from "react-router-dom";
 import app from "../firebase/base.js";
 import "./BookReview.css";
 import { AuthConext } from "../firebase/auth.js";
-import Navbar from "../Navbar";
 import ReviewBox from "./ReviewBox";
 import Review from "./Review";
 import Rating from "react-rating";
@@ -68,7 +67,6 @@ const BookReview = ({ history }) => {
   }, [bookId]);
   return (
     <>
-      <Navbar history={history} currentUser={currentUser} />
       <div className="review-container">
         <div className="book-review">
           <div className="book-review-img">
