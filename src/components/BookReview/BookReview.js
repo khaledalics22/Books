@@ -137,7 +137,7 @@ const BookReview = ({ history }) => {
   };
 
   useEffect(() => {
-    fetchUser();
+    if (currentUser) fetchUser();
     fetchReviews();
   }, [bookId]);
 
@@ -150,23 +150,25 @@ const BookReview = ({ history }) => {
           </div>
 
           <div className="book-review-summary">
-            <div>
-              <button
-                style={{ color: `${liked ? "red" : "white"}` }}
-                className="ActionButton"
-                onClick={toggleLike}
-              >
-                <i class="fa fa-thumbs-up">{liked ? "liked" : "like"}</i>
-              </button>
-              <button
-                style={{ color: `${reading ? "red" : "white"}` }}
-                className="ActionButton"
-                onClick={toggleReading}
-              >
-                <i class="fa fa-plus"></i>
-                {reading ? "Is Reading" : "Add to reading"}
-              </button>
-            </div>
+            {currentUser && (
+              <div>
+                <button
+                  style={{ color: `${liked ? "red" : "white"}` }}
+                  className="ActionButton"
+                  onClick={toggleLike}
+                >
+                  <i class="fa fa-thumbs-up">{liked ? "liked" : "like"}</i>
+                </button>
+                <button
+                  style={{ color: `${reading ? "red" : "white"}` }}
+                  className="ActionButton"
+                  onClick={toggleReading}
+                >
+                  <i class="fa fa-plus"></i>
+                  {reading ? "Is Reading" : "Add to reading"}
+                </button>
+              </div>
+            )}
             <h1 className="italic">{book.title}</h1>
             <h4 className="author-name">{book.author_name}</h4>
             <p>{book.description}</p>
