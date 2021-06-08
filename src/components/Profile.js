@@ -7,22 +7,49 @@ import Rating from 'react-rating';
 import ReactRoundedImage from "react-rounded-image";
 
 
+
+
+function getBooksView(booksArray){
+    if(booksArray!=null&&booksArray?.length>0){
+        return <div >
+        <Divider style={{backgroundColor:'white', height:'1px'}} />
+        <GridList maxWidth="200px" spacing="0px" cols={4} style={{textAlign:'left', textAlignLast:'left'}}>
+            {booksArray?.map((book) => (
+                 <GridListTile className='likedItemContainer' >
+                 <img src={book.cover_url} alt={book.title} className="likedBooks" />
+                 <GridListTileBar
+                 title={book.title}
+                 subtitle={book.author_name}
+                 />
+              </GridListTile>
+         ))}
+        </GridList >
+        {/* <Divider style={{backgroundColor:'white', height:'1px'}}/> */}
+        </div>;
+    }else {
+        return <p className="no_books">No books Yet!</p>;
+    }
+}
 export default function Profile({ history}){
     const db = app.firestore();
     const {currentUser} = useContext(AuthConext);
     const [user ,setUser ] = useState(); 
     const [likedBooksResponse,setListLikedBooks] = useState(); 
+    const [currReadingResponse,setCurrReaingBooks] = useState(); 
+
+    // fetch user data from firebase
     const getUser = async() =>{
         try {
         db.collection('user').doc(currentUser.uid).get().then(async(doc)=>{
             if(doc.exists){
                 setUser(doc.data());
-                const ids = doc.data().liked_books;
-                const list = []; 
-               ids.forEach((id)=>{ 
-                    list.push(id); 
+                // ge liked 
+                const likedBookIds = doc.data().liked_books;
+                const likedList = []; 
+                likedBookIds.forEach((id)=>{ 
+                    likedList.push(id); 
                 });
-                await db.collection('book').where('book_id','in',list)
+                db.collection('book').where('book_id','in',likedList)
                 .get().then((result)=>{
                     const liked = []; 
                     result.forEach((doc)=>{
@@ -35,6 +62,25 @@ export default function Profile({ history}){
                     });
                     setListLikedBooks(liked); 
                 });
+                // get currently reading
+                const currentlyReading = doc.data().currently_reading;
+                const currList = []; 
+                currentlyReading?.forEach((id)=>{ 
+                    currList.push(id); 
+                });
+                db.collection('book').where('book_id','in',currList)
+                .get().then((result)=>{
+                    const curr = []; 
+                    result.forEach((doc)=>{
+                        curr.push({title:doc.data()?.title
+                            ,description:doc.data()?.description,
+                            author_name:doc.data()?.author_name,
+                            category:doc.data()?.category,
+                            cover_url:doc.data()?.cover_url,
+                            rating:doc.data()?.rating});
+                    });
+                    setCurrReaingBooks(curr); 
+                });
             }
         });
        
@@ -42,8 +88,9 @@ export default function Profile({ history}){
        alert('something went wrong!');
       }
     };
+
+    // fetch published books from firebase 
     const [booksResponse,setListOfBooks] = useState(); 
-    
     const getBooks = async ()=> {
             db.collection('book').where('publisher_id','==',currentUser?.uid).get()
             .then(function(result){
@@ -63,51 +110,16 @@ export default function Profile({ history}){
         );
     }
 
+    // fetch from firebase 
     useEffect(()=>{
         getUser();
         getBooks(); 
     },[])
-    let booksView; 
-    if(booksResponse!=null&&booksResponse?.length>0){
-        booksView = <div >
-        <Divider style={{backgroundColor:'white', height:'1px'}} />
-        <GridList  maxWidth="200px" spacing="0px" cols={4} style={{textAlign:'left', textAlignLast:'left'}}>
-               {booksResponse?.map((book) => (
-                <GridListTile className='itemContainer' >
-                    <img src={book.cover_url} alt={book.title} className="bookCover" />
-                    <GridListTileBar
-                    title={book.title}
-                    subtitle={book.author_name}
-                    />
-                 </GridListTile>
-                 
-         ))}
-        </GridList >
-        {/* <Divider style={{backgroundColor:'white', height:'1px'}}/> */}
-        </div>;
-    }else {
-        booksView = <p className="no_books">No Books Published Yet!</p>;
-    }
-    let likedBooks; 
-    if(likedBooksResponse!=null&&likedBooksResponse?.length>0){
-        likedBooks = <div >
-        <Divider style={{backgroundColor:'white', height:'1px'}} />
-        <GridList maxWidth="200px" spacing="0px" cols={4} style={{textAlign:'left', textAlignLast:'left'}}>
-            {likedBooksResponse?.map((book) => (
-                 <GridListTile className='likedItemContainer' >
-                 <img src={book.cover_url} alt={book.title} className="likedBooks" />
-                 <GridListTileBar
-                 title={book.title}
-                 subtitle={book.author_name}
-                 />
-              </GridListTile>
-         ))}
-        </GridList >
-        {/* <Divider style={{backgroundColor:'white', height:'1px'}}/> */}
-        </div>;
-    }else {
-        likedBooks = <p className="no_books">No liked books Yet!</p>;
-    }
+
+    // get html to display
+    let publishedBooks = getBooksView(booksResponse); 
+    let likedBooks = getBooksView(likedBooksResponse); 
+    let currReadingBooks = getBooksView(currReadingResponse);
     
     return (
         <render > 
@@ -127,11 +139,11 @@ export default function Profile({ history}){
            <button className="buttonAddBookAction"  onClick={()=>{
                        history.push('/add-book') 
                     }}>+</button>
-            {booksView}
+            {publishedBooks}
             <h2 className="profileHeaders">Liked Books</h2>
             {likedBooks}
             <h2 className="profileHeaders">Currently Reading</h2>
-            {likedBooks}
+            {currReadingBooks}
             </body>
         </render>
         
