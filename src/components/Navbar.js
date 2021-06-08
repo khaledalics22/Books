@@ -28,7 +28,7 @@ const Navbar = ({history, currentUser,search}, ...props) => {
     };
   }, [showImageList, dropdownRef]);
 
-  console.log(currentUser);
+  //console.log(currentUser);
 
   const handleLogOut = () => {
     app
@@ -56,7 +56,7 @@ const Navbar = ({history, currentUser,search}, ...props) => {
             onChange={(e) => setSearchText(e.target.value)}
             />
             <a className="search-btn" href="#">
-            <i className="fas fa-search"></i>
+            <i className="fas fa-search" onClick={() => search(searchText)}></i>
             </a>
         </div>
 
