@@ -42,13 +42,15 @@ export default function Profile({ history}){
         try {
         db.collection('user').doc(currentUser.uid).get().then(async(doc)=>{
             if(doc.exists){
+                // alert(doc.data().picture_url); 
                 setUser(doc.data());
                 // ge liked 
                 const likedBookIds = doc.data().liked_books;
                 const likedList = []; 
-                likedBookIds.forEach((id)=>{ 
+                likedBookIds?.forEach((id)=>{ 
                     likedList.push(id); 
                 });
+                if(likedList!=null && likedList.length>0)
                 db.collection('book').where('book_id','in',likedList)
                 .get().then((result)=>{
                     const liked = []; 
@@ -68,10 +70,11 @@ export default function Profile({ history}){
                 currentlyReading?.forEach((id)=>{ 
                     currList.push(id); 
                 });
+                if(currList!=null && currList.length>0)
                 db.collection('book').where('book_id','in',currList)
                 .get().then((result)=>{
                     const curr = []; 
-                    result.forEach((doc)=>{
+                    result?.forEach((doc)=>{
                         curr.push({title:doc.data()?.title
                             ,description:doc.data()?.description,
                             author_name:doc.data()?.author_name,
@@ -117,7 +120,18 @@ export default function Profile({ history}){
     },[])
 
     // get html to display
-    let publishedBooks = getBooksView(booksResponse); 
+    let publishedBooks;
+    if(user?.user_type=="author") 
+        publishedBooks = <div>
+            <h2 className="profileHeaders">Published Books</h2>
+           <button className="buttonAddBookAction"  onClick={()=>{
+                       history.push('/add-book') 
+                    }}>+</button>
+                    {getBooksView(booksResponse)}
+        </div>;
+    else{
+        publishedBooks = <br></br>;
+    }
     let likedBooks = getBooksView(likedBooksResponse); 
     let currReadingBooks = getBooksView(currReadingResponse);
     
@@ -126,7 +140,7 @@ export default function Profile({ history}){
             <body className="profileBody">
             <div>
              <ReactRoundedImage
-                    image={user?.picture_url}
+                    image={user&&user.picture_url}
                     roundedColor="#66A5CC"
                     roundedSize="8"
                     borderRadius="100"
@@ -134,11 +148,8 @@ export default function Profile({ history}){
             </ReactRoundedImage>
             <h2 className="username">{user&&user?.name}</h2>
             <h3 className="useremail">{user?.email}</h3>
+            <h3 className="useremail">{" > "}{user?.user_type}</h3>
             </div>
-           <h2 className="profileHeaders">Published Books</h2>
-           <button className="buttonAddBookAction"  onClick={()=>{
-                       history.push('/add-book') 
-                    }}>+</button>
             {publishedBooks}
             <h2 className="profileHeaders">Liked Books</h2>
             {likedBooks}

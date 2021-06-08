@@ -48,9 +48,11 @@ const AddBook = ({ history })=>{
     },[history]);
     return (
         <render >
-            <h1 name='addbook' >Add New Book</h1>
-            <div class="container">
-                <form style={{display:'inline-block'}} onSubmit={handleAddBook}>
+           
+            <div class="container"> 
+            <body className="bodyAddBook">    
+                <h1 style={{color:'white'}} name='addbook' >Add New Book</h1>
+                <form className="formAddBook" style={{display:'inline-block'}} onSubmit={handleAddBook}>
                     <label className="labelAddBook">Book title</label> 
                     <input className="inputAddBook" name="title" type="label" placeholder="Book Title" />
                     <label className="labelAddBook"> Author Name  </label> 
@@ -63,7 +65,9 @@ const AddBook = ({ history })=>{
                     <input className="inputFile" type="file" id="file" onChange={handleChange} />
                     <button className="buttonAddBook" type="submit">Add</button><br/>
                 </form>
+                </body>
             </div>
+           
         </render>
         
     );
