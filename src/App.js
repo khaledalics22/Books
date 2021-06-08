@@ -8,6 +8,7 @@ import Login from "./components/Login";
 import Home from "./components/Home";
 import Profile from "./components/Profile";
 import AddBook from "./components/AddBook";
+import Explore from "./components/Explore";
 import BookReview from "./components/BookReview/BookReview";
 import Navbar from "./components/Navbar";
 

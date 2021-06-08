@@ -5,7 +5,7 @@ import "./Navbar.css";
 import temp from "../user-circle-solid.svg";
 import { AuthConext } from "./firebase/auth";
 
-const Navbar = (...props) => {
+const Navbar = ({ search }, ...props) => {
   const { currentUser } = useContext(AuthConext);
   const dropdownRef = useRef(null);
   const [searchText, setSearchText] = useState("");
@@ -32,7 +32,7 @@ const Navbar = (...props) => {
     };
   }, [showImageList, dropdownRef]);
 
-  console.log(currentUser);
+  //console.log(currentUser);
 
   const handleLogOut = () => {
     app
@@ -49,6 +49,20 @@ const Navbar = (...props) => {
   return (
     <nav className="navBarItems">
       <h1 className="title-nav">BookNerds</h1>
+
+      <div className="search-box">
+        <input
+          type="text"
+          value={searchText}
+          className="search-text"
+          name="searchText"
+          placeholder="Search books"
+          onChange={(e) => setSearchText(e.target.value)}
+        />
+        <a className="search-btn" href="#">
+          <i className="fas fa-search" onClick={() => search(searchText)}></i>
+        </a>
+      </div>
 
       <div className="search-box">
         <input
