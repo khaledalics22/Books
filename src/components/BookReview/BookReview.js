@@ -15,28 +15,7 @@ const BookReview = ({ history }) => {
   const [reviews, setReviews] = useState([]);
   const { currentUser } = useContext(AuthConext);
 
-  useEffect(() => {
-    db.collection("book")
-      .get()
-      .then((book) => {
-        book.forEach((b) => {
-          console.log(b.data());
-        });
-      })
-      .catch((err) => {
-        console.error(err);
-      });
-    db.collection("book")
-      .doc(bookId)
-      .get()
-      .then((book) => {
-        console.log(book.data());
-        setBook(book.data());
-      })
-      .catch((err) => {
-        console.error(err);
-      });
-
+  const fetchReviews = () => {
     db.collection("review")
       .where("book_id", "==", bookId)
       .get()
@@ -53,6 +32,31 @@ const BookReview = ({ history }) => {
       .catch((err) => {
         console.error(err);
       });
+  };
+
+  useEffect(() => {
+    // db.collection("book")
+    //   .get()
+    //   .then((book) => {
+    //     book.forEach((b) => {
+    //       console.log(b.data());
+    //     });
+    //   })
+    //   .catch((err) => {
+    //     console.error(err);
+    //   });
+    db.collection("book")
+      .doc(bookId)
+      .get()
+      .then((book) => {
+        console.log(book.data());
+        setBook(book.data());
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+
+    fetchReviews();
   }, [bookId]);
   return (
     <>
@@ -70,7 +74,7 @@ const BookReview = ({ history }) => {
         </div>
       </div>
       <div>
-        <ReviewBox bookId={bookId} />
+        <ReviewBox bookId={bookId} fetchReviews={fetchReviews} />
         {reviews.map((review, index) => {
           return <Review key={index} review={review} />;
         })}

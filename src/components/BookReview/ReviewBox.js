@@ -5,7 +5,7 @@ import app from "../firebase/base.js";
 const db = app.firestore();
 
 const ReviewBox = (props) => {
-  const { bookId } = props;
+  const { bookId, fetchReviews } = props;
   const { currentUser } = useContext(AuthConext);
 
   const addReview = (e) => {
@@ -20,6 +20,7 @@ const ReviewBox = (props) => {
       console.log(reviewObject);
       db.collection("review").doc().set(reviewObject);
       e.target.elements.review.value = "";
+      fetchReviews();
     }
   };
 
