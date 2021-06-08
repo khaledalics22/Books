@@ -30,6 +30,7 @@ const Login = ({ history }) => {
 
   return (
     <render >
+      <body className="bodyLogin">
         <h6 name='login' style={{fontSize:'xx-large'}}>Login</h6>
         <div class="container2">
             <form style={{display:'inline-block'}} onSubmit={handleLogin}>
@@ -41,6 +42,7 @@ const Login = ({ history }) => {
                 <Link to="/signup">Don't have email? SignUP!</Link>
             </form>
         </div>
+        </body>
     </render>
   );
 };

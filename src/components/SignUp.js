@@ -47,21 +47,23 @@ const SignUp = ({ history }) => {
     };
   return (
     <render >
-        <h6 name='login' style={{fontSize:'xx-large'}}>Sign Up</h6>
-        <div class="container3">
-            <form style={{display:'inline-block'}} onSubmit={handleSignUp}>
-                <label className="labelSignUp">Name</label> 
-                <input className="inputSignUp" name="name" type="label" placeholder="Name" />
-                <label className="labelSignUp">Email</label> 
-                <input className="inputSignUp" name="email" type="email" placeholder="Email" />
-                <label className="labelSignUp"> Password </label>
-                <input className="inputSignUp" name="password" type="password" placeholder="Password" /> 
-                <label className="labelSignUp">Choose Image</label>
-                <input className="inputSignUp" type="file" id="file" onChange={handleChange} />
-                <button className="buttonSignUp" type="submit">Sign Up</button><br/>
-                <Link to="/login">Already have email? Login!</Link>
-            </form>
-        </div>
+      <body className="bodySignUp">
+          <h6 name='login' style={{fontSize:'xx-large'}}>Sign Up</h6>
+          <div class="container3">
+              <form style={{display:'inline-block'}} onSubmit={handleSignUp}>
+                  <label className="labelSignUp">Name</label> 
+                  <input className="inputSignUp" name="name" type="label" placeholder="Name" />
+                  <label className="labelSignUp">Email</label> 
+                  <input className="inputSignUp" name="email" type="email" placeholder="Email" />
+                  <label className="labelSignUp"> Password </label>
+                  <input className="inputSignUp" name="password" type="password" placeholder="Password" /> 
+                  <label className="labelSignUp">Choose Image</label>
+                  <input className="inputSignUp" type="file" id="file" onChange={handleChange} />
+                  <button className="buttonSignUp" type="submit">Sign Up</button><br/>
+                  <Link to="/login">Already have email? Login!</Link>
+              </form>
+          </div>
+          </body>
     </render>
   );
 };

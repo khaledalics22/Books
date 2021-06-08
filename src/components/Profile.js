@@ -11,12 +11,30 @@ export default function Profile({ history}){
     const db = app.firestore();
     const {currentUser} = useContext(AuthConext);
     const [user ,setUser ] = useState(); 
-
+    const [likedBooksResponse,setListLikedBooks] = useState(); 
     const getUser = async() =>{
         try {
-        db.collection('user').doc(currentUser.uid).get().then((doc)=>{
+        db.collection('user').doc(currentUser.uid).get().then(async(doc)=>{
             if(doc.exists){
                 setUser(doc.data());
+                const ids = doc.data().liked_books;
+                const list = []; 
+               ids.forEach((id)=>{ 
+                    list.push(id); 
+                });
+                await db.collection('book').where('book_id','in',list)
+                .get().then((result)=>{
+                    const liked = []; 
+                    result.forEach((doc)=>{
+                        liked.push({title:doc.data()?.title
+                            ,description:doc.data()?.description,
+                            author_name:doc.data()?.author_name,
+                            category:doc.data()?.category,
+                            cover_url:doc.data()?.cover_url,
+                            rating:doc.data()?.rating});
+                    });
+                    setListLikedBooks(liked); 
+                });
             }
         });
        
@@ -25,6 +43,7 @@ export default function Profile({ history}){
       }
     };
     const [booksResponse,setListOfBooks] = useState(); 
+    
     const getBooks = async ()=> {
             db.collection('book').where('publisher_id','==',currentUser?.uid).get()
             .then(function(result){
@@ -43,6 +62,7 @@ export default function Profile({ history}){
             }
         );
     }
+
     useEffect(()=>{
         getUser();
         getBooks(); 
@@ -68,9 +88,30 @@ export default function Profile({ history}){
     }else {
         booksView = <p className="no_books">No Books Published Yet!</p>;
     }
+    let likedBooks; 
+    if(likedBooksResponse!=null&&likedBooksResponse?.length>0){
+        likedBooks = <div >
+        <Divider style={{backgroundColor:'white', height:'1px'}} />
+        <GridList cellHeight="auto" maxWidth="200px" spacing="0px" cols={4} style={{textAlign:'left', textAlignLast:'left'}}>
+            {likedBooksResponse?.map((book) => (
+            <div className='likedItemContainer'>
+                <img src={book.cover_url} className="likedBooks"/>
+                <p className="likedbookTitle" >{book.title}</p>
+                <p className="likedbookTileData">Category: {book.category}</p>
+                <p className="likedbookTileData">Author: {book.author_name}</p>
+                <p className="likedbookTileData">{book.description}</p> 
+            </div>
+         ))}
+        </GridList >
+        <Divider style={{backgroundColor:'white', height:'1px'}}/>
+        </div>;
+    }else {
+        likedBooks = <p className="no_books">No liked books Yet!</p>;
+    }
     
     return (
         <render > 
+            <body className="profileBody">
             <div>
              <ReactRoundedImage
                     image={user?.picture_url}
@@ -87,6 +128,9 @@ export default function Profile({ history}){
                        history.push('/add-book') 
                     }}>+</button>
             {booksView}
+            <h2 className="profileHeaders">Liked Books</h2>
+            {likedBooks}
+            </body>
         </render>
         
     );

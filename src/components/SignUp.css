@@ -1,9 +1,10 @@
-/* body {
+.bodySignUp {
     background-color: #282c34;
     color: white;
     padding: 40px;
     font-family: Arial;
-  } */
+    text-align: center;
+  }
 .labelSignUp{
     font-size: x-large;
     display: block;

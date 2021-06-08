@@ -30,7 +30,9 @@ const AddBook = ({ history })=>{
             // uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) =>{
             uploadTask.snapshot.ref.getDownloadURL().then(async (url) =>{
               const db = app.firestore();
-              await db.collection('book').doc().set({
+              const doc = db.collection('book').doc(); 
+              await doc.set({
+                  book_id:doc.id,
                   publisher_id: currentUser.uid,title:title.value,
                   author_name:authoerName.value, description:description.value,
                   category:category.value,cover_url:url,rating:0}); 
