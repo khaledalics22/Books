@@ -11,6 +11,7 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     app.auth().onAuthStateChanged((authUser) => {
       if (authUser) {
+        console.log(authUser);
         setCurrentUser(authUser);
         return localStorage.setItem("authUser", JSON.stringify(authUser));
       } else {
