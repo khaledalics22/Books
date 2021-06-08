@@ -20,6 +20,7 @@ const DefaultComponents = () => {
       <Route exact path="/profile" component={Profile} />
       <Route exact path="/add-book" component={AddBook} />
       <Route exact path="/reviews/:bookId" component={BookReview} />
+      <Route exact path="/explore" component={Explore} />
     </>
   );
 };

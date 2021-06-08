@@ -5,14 +5,32 @@ import "./Navbar.css";
 import temp from "../user-circle-solid.svg";
 import { AuthConext } from "./firebase/auth";
 
+const db = app.firestore();
+
 const Navbar = ({ search }, ...props) => {
   const { currentUser } = useContext(AuthConext);
   const dropdownRef = useRef(null);
+  const [user, setUser] = useState("");
   const [searchText, setSearchText] = useState("");
   const [showImageList, setShowImageList] = useState(false);
   let history = useHistory();
 
+  const getUser = () => {
+    db.collection("user")
+      .doc(currentUser.uid)
+      .get()
+      .then((doc) => {
+        if (doc.exists) {
+          setUser(doc.data());
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   useEffect(() => {
+    getUser();
     console.log(props);
     const pageClickEvent = (e) => {
       if (
@@ -30,9 +48,7 @@ const Navbar = ({ search }, ...props) => {
     return () => {
       window.removeEventListener("click", pageClickEvent);
     };
-  }, [showImageList, dropdownRef]);
-
-  //console.log(currentUser);
+  }, [showImageList, dropdownRef, currentUser]);
 
   const handleLogOut = () => {
     app
@@ -64,20 +80,6 @@ const Navbar = ({ search }, ...props) => {
         </a>
       </div>
 
-      <div className="search-box">
-        <input
-          type="text"
-          value={searchText}
-          className="search-text"
-          name="searchText"
-          placeholder="Search books"
-          onChange={(e) => setSearchText(e.target.value)}
-        />
-        <a className="search-btn" href="#">
-          <i className="fas fa-search"></i>
-        </a>
-      </div>
-
       <div className="items">
         <Link to="/" className="home-nav">
           Home
@@ -96,7 +98,7 @@ const Navbar = ({ search }, ...props) => {
         <div className="menu-container">
           <img
             className="user-image-nav"
-            src={currentUser ? currentUser.picture_url : temp}
+            src={user ? user.picture_url : temp}
             onClick={() => setShowImageList(!showImageList)}
           ></img>
           <div
@@ -105,7 +107,7 @@ const Navbar = ({ search }, ...props) => {
           >
             <ul>
               <li>
-                <div className="username-menu">{currentUser?.name}</div>
+                <div className="username-menu">{user?.name}</div>
               </li>
               <li>
                 <Link to="/profile" className="profile-menu">

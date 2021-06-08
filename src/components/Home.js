@@ -1,13 +1,10 @@
 import React, { useContext, useState, useEffect, useRef } from "react";
 import app from "./firebase/base.js";
-import { AuthConext } from "./firebase/auth.js";
 import HomeBook from "./HomeBook";
 import "./Home.css";
 
 export default function Home({ history }) {
   const db = app.firestore();
-  const { currentUser } = useContext(AuthConext);
-  const [user, setUser] = useState("");
   const [books, setBooks] = useState([]);
   const [scrolling, setScrolling] = useState(false);
   const [scrollTop, setScrollTop] = useState(0);
@@ -17,21 +14,6 @@ export default function Home({ history }) {
   function hasReachedBottom() {
     return window.innerHeight + window.scrollY >= document.body.offsetHeight;
   }
-
-  const getUser = async () => {
-    try {
-      db.collection("user")
-        .doc(currentUser.uid)
-        .get()
-        .then((doc) => {
-          if (doc.exists) {
-            setUser(doc.data());
-          }
-        });
-    } catch {
-      alert("something went wrong!");
-    }
-  };
 
   const getBooks = async () => {
     try {
@@ -71,7 +53,6 @@ export default function Home({ history }) {
   };
 
   useEffect(() => {
-    getUser();
     getBooks();
   }, []);
 
