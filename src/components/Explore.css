@@ -15,17 +15,18 @@
 .categoryLink:hover {
   color: blue;
   text-decoration: underline;
+  cursor: pointer;
 }
 
 .booksContainer {
-  width: 80%;
+  width: 90%;
   float: left;
   margin: 5%;
 }
 
 .book-img {
   display: block;
-  width: 15rem;
+  width: 12rem;
   padding: 10% 10% 10% 10%;
 }
 .checkBoxes {

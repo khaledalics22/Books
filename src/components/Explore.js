@@ -5,10 +5,19 @@ import { Link } from "react-router-dom";
 import Navbar from "./Navbar";
 import { AuthConext } from "./firebase/auth.js";
 import HomeBook from "./HomeBook";
+
+const orders = [
+  { Name: "Likes", order: "likes" },
+  { Name: "Title", order: "title" },
+  { Name: "Author Name", order: "author_name" },
+  { Name: "Rating", order: "rating" },
+];
+
 const Explore = ({ history }) => {
   const { currentUser } = useContext(AuthConext);
   const db = app.firestore();
   const [categories, setCategories] = useState();
+
   const getCategory = async () => {
     try {
       let categories = [];
@@ -31,20 +40,23 @@ const Explore = ({ history }) => {
       <div className="categoriesContainer">
         <h1>Categories</h1>
         {categories.map((category) => (
-          <Link
+          <a
             key={category.id}
-            to={"/category/" + category.Name}
             className="categoryLink"
+            onClick={() => changeCategory(category.Name)}
           >
             <h3 className="categoryLink"> {category.Name} </h3>
-          </Link>
+          </a>
         ))}
       </div>
     );
   }
+  const changeCategory = (category) => {
+    getBooks("title", "", category);
+  };
 
   const [books, setBooks] = useState();
-  const getBooks = async (orderBy, searchText) => {
+  const getBooks = async (orderBy, searchText, category) => {
     try {
       let books = [];
       let query = db.collection("book");
@@ -72,6 +84,7 @@ const Explore = ({ history }) => {
         });
         setBooks(books);
       } else {
+        if (category !== "") query = query.where("category", "==", category);
         let result = await query.orderBy(orderBy).get();
         if (!result) console.log("There is no books in the database");
         else {
@@ -79,10 +92,12 @@ const Explore = ({ history }) => {
             books.push(doc.data());
           });
         }
+        console.log(books);
         setBooks(books);
       }
     } catch (err) {
       alert(err);
+      console.log(err);
     }
   };
 
@@ -90,51 +105,53 @@ const Explore = ({ history }) => {
   if (books != null) {
     booksList = (
       <div className="booksContainer">
-        {books.map(({ title, category, rating, author_name, cover_url }) => (
-          <HomeBook
-            title={title}
-            category={category}
-            rating={rating}
-            author_name={author_name}
-            cover_url={cover_url}
-          />
+        {books.map((book) => (
+          <HomeBook key={book.book_id} book={book} />
         ))}
       </div>
     );
   }
-  let [orderBy] = useState("title");
-  const changeOrderBy = (orderby) => {
-    orderBy = orderby;
-    console.log(orderBy);
+
+  const [checkedState, setCheckedState] = useState(
+    new Array(orders.length).fill(false)
+  );
+
+  const handleOnChange = (position) => {
+    const updatedCheckedState = checkedState.map((item, index) =>
+      index === position ? !item : false
+    );
+    setCheckedState(updatedCheckedState);
+
+    updatedCheckedState.forEach((item, index) => {
+      if (item === true) setOrderBy(orders[index].order);
+    });
   };
+  let [orderBy, setOrderBy] = useState("title");
   const orderByChecked = (
     <div className="checkBoxes">
       <label>Order By</label>
       <ul>
-        <li>
-          <input type="radio" onClick={changeOrderBy("likes")} /> Likes
-        </li>
-        <li>
-          <input type="radio" onClick={changeOrderBy("title")} /> Title
-        </li>
-        <li>
-          <input type="radio" onClick={changeOrderBy("author_name")} /> Author
-          Name
-        </li>
-        <li>
-          <input type="radio" onClick={changeOrderBy("rating")} /> Rating
-        </li>
+        {orders.map(({ Name, order }, index) => {
+          <li key={index}>
+            <input
+              onChange={() => handleOnChange(index)}
+              checked={checkedState[index]}
+              type="checkbox"
+            />
+            {Name}
+          </li>;
+        })}
       </ul>
     </div>
   );
   const onClickSearch = (searchText) => {
     console.log(searchText);
-    getBooks("title", searchText);
+    getBooks(orderBy, searchText, "");
   };
 
   useEffect(() => {
     getCategory();
-    getBooks(orderBy, "");
+    getBooks("title", "", "");
   }, []);
   return (
     <render>
