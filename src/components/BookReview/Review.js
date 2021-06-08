@@ -26,10 +26,10 @@ const Review = (props) => {
       <div className="comment">
         <img
           className="d-flex g-width-50 g-height-50 rounded-circle g-mt-3 g-mr-15"
-          src={avatar}
+          src={avatar || defaultImg}
           alt="Image Description"
         />
-        <h5 className="h5 g-color-gray-dark-v1 mb-0">{name}</h5>
+        <h5 className="h5 g-color-gray-dark-v1 mb-0">{name || "Reviewer"}</h5>
         <p className="review-content">{content}</p>
       </div>
     </div>

@@ -25,7 +25,6 @@ const BookReview = ({ history }) => {
         let result = [];
         reviews.forEach((review) => {
           result.push(review.data());
-          result.push(review.data());
           console.log(review.id);
         });
         console.log(result);
