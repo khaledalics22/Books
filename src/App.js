@@ -9,6 +9,7 @@ import Home from "./components/Home";
 import Profile from "./components/Profile";
 import AddBook from "./components/AddBook";
 import Explore from "./components/Explore";
+import BookReview from "./components/BookReview/BookReview";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <Route exact path="/profile" component={Profile} />
         <Route exact path="/add-book" component={AddBook} />
         <Route exact path="/explore" component={Explore} />
+        <Route exact path="/reviews/:bookId" component={BookReview} />
       </Router>
     </AuthProvider>
   );

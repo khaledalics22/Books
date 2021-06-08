@@ -5,6 +5,18 @@
     font-family: Arial;
     text-align: center;
   }   */
+  .bodyAddBook {
+    background-color: #282c34;
+    color: black;
+    padding: 40px;
+    font-family: Arial;
+    text-align: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  } 
 .labelAddBook{
     font-size: large;
     display: block;
@@ -16,6 +28,14 @@
     clear: both;
     
   }
+  .formAddBook{
+    padding: 60px;
+    width: 400px;
+    height: min-content;
+    margin: 30px;
+    background-color: white;
+  }
+  
   
 .container input {
     width: 100%;
