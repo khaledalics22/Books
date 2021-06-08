@@ -28,7 +28,7 @@ const Navbar = ({ history, currentUser }, ...props) => {
     };
   }, [showImageList, dropdownRef]);
 
-  //   console.log(currentUser);
+  console.log(currentUser);
 
   const handleLogOut = () => {
     app

@@ -1,9 +1,9 @@
 body {
   margin: 0;
-  background-color: #282c34;
   color: black;
   font-family: "Libre Baskerville", "Droid Serif", "Times New Roman", Times,
     serif;
+  background-color: #313642;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   padding-bottom: 1rem;

@@ -30,17 +30,19 @@ const Login = ({ history }) => {
 
   return (
     <render >
-        <h6 name='login' style={{fontSize:'xx-large'}}>Login</h6>
+      <body className="bodyLogin">
+        <h1 name='login'>Login</h1>
         <div class="container2">
-            <form style={{display:'inline-block'}} onSubmit={handleLogin}>
+            <form className="formLogin" style={{display:'inline-block'}} onSubmit={handleLogin}>
                 <label className="labelLogin"> Email </label> 
                 <input className="inputLogin" name="email" type="label" placeholder="Email" /> 
                 <label className="labelLogin"> Password </label> 
                 <input className="inputLogin" name="password" type="password" placeholder="Password" /> 
                 <button className="buttonLogin" type="submit">Login</button><br/>
-                <Link to="/signup">Don't have email? SignUP!</Link>
+                <Link className="loginLink" to="/signup">Don't have email? SignUP!</Link>
             </form>
         </div>
+      </body>
     </render>
   );
 };

@@ -1,38 +1,65 @@
-import React, { useContext, useState, useEffect } from "react";
+import { render } from "@testing-library/react";
+import React, { useContext, useState } from "react";
 import app from "./firebase/base.js";
 import { AuthConext } from "./firebase/auth.js";
 import Navbar from "./Navbar";
 import HomeBook from "./HomeBook";
 import "./Home.css";
 
-const db = app.firestore();
-
-const Home = ({ history }) => {
-  const [books, setBooks] = useState([]);
+export default function Home({ history }) {
+  const db = app.firestore();
   const { currentUser } = useContext(AuthConext);
-  useEffect(() => {
-    db.collection("book")
-      .get()
-      .then((fetchedBooks) => {
-        let result = [];
-        fetchedBooks.forEach((book) => {
-          result.push({ ...book.data(), id: book.id });
+  const [user, setUser] = useState();
+  const [likedBooksResponse, setListLikedBooks] = useState();
+  const getUser = async () => {
+    try {
+      db.collection("user")
+        .doc(currentUser.uid)
+        .get()
+        .then(async (doc) => {
+          if (doc.exists) {
+            setUser(doc.data());
+            const ids = doc.data().liked_books;
+            const list = [];
+            ids.forEach((id) => {
+              list.push(id);
+            });
+            await db
+              .collection("book")
+              .where("book_id", "in", list)
+              .get()
+              .then((result) => {
+                const liked = [];
+                result.forEach((doc) => {
+                  liked.push({
+                    title: doc.data()?.title,
+                    description: doc.data()?.description,
+                    author_name: doc.data()?.author_name,
+                    category: doc.data()?.category,
+                    cover_url: doc.data()?.cover_url,
+                    rating: doc.data()?.rating,
+                  });
+                });
+                setListLikedBooks(liked);
+              });
+          }
         });
-        setBooks(result);
-        console.log(books);
-      })
-      .catch((err) => {
-        console.error(err);
-      });
-  }, []);
+    } catch {
+      alert("something went wrong!");
+    }
+  };
+
   return (
     <div>
-      <Navbar history={history} currentUser={currentUser} />
-      {books.map((book) => (
-        <HomeBook book={book} />
-      ))}
+      <Navbar history={history} currentUser={user} />
+      <div className="home-books">
+        <HomeBook book={null} />
+        <HomeBook book={null} />
+        <HomeBook book={null} />
+        <HomeBook book={null} />
+        <HomeBook book={null} />
+        <HomeBook book={null} />
+      </div>
     </div>
   );
-};
-
-export default Home;
+}

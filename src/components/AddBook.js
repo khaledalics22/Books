@@ -31,7 +31,9 @@ const AddBook = ({ history }) => {
       // uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) =>{
       uploadTask.snapshot.ref.getDownloadURL().then(async (url) => {
         const db = app.firestore();
-        await db.collection("book").doc().set({
+        const doc = db.collection("book").doc();
+        await doc.set({
+          book_id: doc.id,
           publisher_id: currentUser.uid,
           title: title.value,
           author_name: authoerName.value,
@@ -55,49 +57,57 @@ const AddBook = ({ history }) => {
   );
   return (
     <render>
-      <h1 name="addbook">Add New Book</h1>
       <div class="container">
-        <form style={{ display: "inline-block" }} onSubmit={handleAddBook}>
-          <label className="labelAddBook">Book title</label>
-          <input
-            className="inputAddBook"
-            name="title"
-            type="label"
-            placeholder="Book Title"
-          />
-          <label className="labelAddBook"> Author Name </label>
-          <input
-            className="inputAddBook"
-            name="authoerName"
-            type="label"
-            placeholder="Author Name"
-          />
-          <label className="labelAddBook"> category </label>
-          <input
-            className="inputAddBook"
-            name="category"
-            type="label"
-            placeholder="Category"
-          />
-          <label className="labelAddBook"> description </label>
-          <input
-            className="inputAddBook"
-            name="description"
-            type="label"
-            placeholder="Description"
-          />
-          <label className="labelAddBook"> Book Cover </label>
-          <input
-            className="inputFile"
-            type="file"
-            id="file"
-            onChange={handleChange}
-          />
-          <button className="buttonAddBook" type="submit">
-            Add
-          </button>
-          <br />
-        </form>
+        <body className="bodyAddBook">
+          <h1 style={{ color: "white" }} name="addbook">
+            Add New Book
+          </h1>
+          <form
+            className="formAddBook"
+            style={{ display: "inline-block" }}
+            onSubmit={handleAddBook}
+          >
+            <label className="labelAddBook">Book title</label>
+            <input
+              className="inputAddBook"
+              name="title"
+              type="label"
+              placeholder="Book Title"
+            />
+            <label className="labelAddBook"> Author Name </label>
+            <input
+              className="inputAddBook"
+              name="authoerName"
+              type="label"
+              placeholder="Author Name"
+            />
+            <label className="labelAddBook"> category </label>
+            <input
+              className="inputAddBook"
+              name="category"
+              type="label"
+              placeholder="Category"
+            />
+            <label className="labelAddBook"> description </label>
+            <input
+              className="inputAddBook"
+              name="description"
+              type="label"
+              placeholder="Description"
+            />
+            <label className="labelAddBook"> Book Cover </label>
+            <input
+              className="inputFile"
+              type="file"
+              id="file"
+              onChange={handleChange}
+            />
+            <button className="buttonAddBook" type="submit">
+              Add
+            </button>
+            <br />
+          </form>
+        </body>
       </div>
     </render>
   );

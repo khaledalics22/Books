@@ -75,6 +75,9 @@
 .review-content {
   margin-top: revert;
 }
+.review-container {
+  margin-top: 90px;
+}
 .review-container .comment {
   display: flex;
   justify-content: center;

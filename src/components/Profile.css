@@ -1,10 +1,10 @@
-/* body {
+ .profileBody {
     background-color: #282c34;
     color: white;
     padding: 40px;
     font-family: Arial;
     text-align: center;
-  } */
+  } 
   
   .labelProfile{
     font-size: xx-large;
@@ -30,11 +30,11 @@
     text-align-last: left;
   }
   .wrap{
-    height: 140px;
+    height: auto;
     text-align-last: left;
   }
 .dividerProfile{
-  background-color: white;
+  background-color: gray;
   height: 1px;
 }
 .itemContainer{
@@ -43,18 +43,38 @@
   border: 1px solid white;
   grid-gap: 15px;
   margin: 7px;
-  max-width: 300px;
-  height: fit-content;
+  background-color: white;
+  max-width: 200px;
+  height:300px;
+  max-height: 300px;
   grid-column: auto;
 
 }
 .profileHeaders{
-  text-align-last: left;
+  display: inline-block;
+}
+.likedItemContainer{
+  text-align: center;
+  align-content: center;
+  border: 1px solid white;
+  grid-gap: 15px;
+  margin: 7px;
+  background-color: white;
+  max-width: 150px;
+  height:200px;
+  max-height: 200px;
+  grid-column: auto;
+}
+.likedBooks{
+  width:150px;
+  height: 200px;
+  object-fit: cover;
+  display: block;
 }
 .buttonAddBookAction{
-  display: inline;
   width: 40px;
   height: 40px;
+  margin: 7px;
   font-size: x-large;
   border-radius: 25px;
 }
@@ -63,18 +83,37 @@
   color: gray;
 }
 .bookCover{
-  width:300px;
-  height: 200px;
+  width:200px;
+  height: 300px;
   object-fit: cover;
   display: block;
 }
 .bookTileData{
   text-align: left;
   margin: 0%;
+  color: darkblue;
   display: block;
   max-lines: 3;
+  max-width: 150px;
+}
+.likedbookTitle{
+  text-align: left;
+  margin: 0%;
+  display: table-row;
+  max-lines: 3;
+  font-size:22px;
+  color: darkblue;
   padding: 5px;
+  vertical-align: top;
   max-width: 200px;
+}
+.likedbookTileData{
+  display: table-row;
+  max-lines: 3;
+  padding: 5px;
+  color: gray;
+  vertical-align: middle;
+ 
 }
 .gridListDiv{
   display: block;
