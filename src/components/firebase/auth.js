@@ -18,6 +18,7 @@ export const AuthProvider = ({ children }) => {
         return localStorage.removeItem("authUser");
       }
     });
+    app.auth().onAuthStateChanged(setCurrentUser);
   }, []);
   return (
     <AuthConext.Provider value={{ currentUser }}>
