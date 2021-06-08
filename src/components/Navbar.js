@@ -66,7 +66,6 @@ const Navbar = ({history, currentUser}, ...props) => {
                     </ul>
                 </div>
             </div>
-
         </nav>
     )
 }
