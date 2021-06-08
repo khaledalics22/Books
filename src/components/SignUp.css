@@ -1,21 +1,30 @@
-body {
+/* body {
     background-color: #282c34;
     color: white;
     padding: 40px;
     font-family: Arial;
-    text-align: center;
-  }
-h1{
-    font-size: 500%;
-}  
-label{
-    font-size: 200%;
+  } */
+.labelSignUp{
+    font-size: x-large;
+    display: block;
+    margin: 15px;
 }
-input{
+.inputSignUp{
+    display: block;
     height: 40px;
     font-size: large;
     font-family: 'Times New Roman', Times, serif;
-    padding-left: 10px;
+}
+  
+.container3 {
+    width: auto;
+    clear: both;
+
+}
+.container3 input {
+    width: 100%;
+    clear: both;
+
 }
 a:link{
     color: white;
@@ -30,16 +39,18 @@ a:visited{
     color: white;
 }
 
-button{
+.buttonSignUp{
     color:darkblue;
     background-color: white;
     font-size: x-large;
-    margin: 30px;
+    margin-top: 15px;
+    margin-bottom: 15px;
     padding: 10px;
+    width: 200px;
     min-width: 300;
     padding-left: 20px;
     padding-right: 20px;
     border-radius: 20px;
     font-family: 'Times New Roman', Times, serif;
     font-weight: normal;
-}
+  }

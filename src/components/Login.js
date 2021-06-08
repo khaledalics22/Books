@@ -2,6 +2,7 @@ import React, { useCallback, useContext } from "react";
 import { withRouter, Redirect,Link } from "react-router-dom";
 import { AuthConext } from "./firebase/auth.js";
 import app from "./firebase/base.js";
+import './Login.css'
 
 const Login = ({ history }) => {
 
@@ -28,17 +29,19 @@ const Login = ({ history }) => {
   }
 
   return (
-    <div>
-      <h1>Log in</h1>
-      <form onSubmit={handleLogin}>
-        <label>Email</label><p></p>
-        <input name="email" type="email" placeholder="Email" /><p></p>
-        <label>Password</label><p></p>
-        <input name="password" type="password" placeholder="Password" /><p></p>
-        <button type="submit">Log in</button><p></p>
-        <Link to='/signup'>Don't have Email? Sign Up!</Link>
-      </form>
-    </div>
+    <render >
+        <h6 name='login' style={{fontSize:'xx-large'}}>Login</h6>
+        <div class="container2">
+            <form style={{display:'inline-block'}} onSubmit={handleLogin}>
+                <label className="labelLogin"> Email </label> 
+                <input className="inputLogin" name="email" type="label" placeholder="Email" /> 
+                <label className="labelLogin"> Password </label> 
+                <input className="inputLogin" name="password" type="password" placeholder="Password" /> 
+                <button className="buttonLogin" type="submit">Login</button><br/>
+                <Link to="/signup">Don't have email? SignUP!</Link>
+            </form>
+        </div>
+    </render>
   );
 };
 

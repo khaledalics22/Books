@@ -1,63 +1,93 @@
-body {
+/* body {
     background-color: #282c34;
     color: white;
     padding: 40px;
     font-family: Arial;
     text-align: center;
+  } */
+  
+  .labelProfile{
+    font-size: xx-large;
   }
-  h1{
-    font-size: 500%;
-  }  
-  label{
-    font-size: 200%;
-  }
-  input{
-    height: 40px;
-    font-size: large;
-    font-family: 'Times New Roman', Times, serif;
-    padding-left: 10px;
-  }
-  a:link{
-    color: white;
-  }
-  a:hover{
-    color: white;
-  }
-  a:active{
-    color: white;
-  }
-  a:visited{
-    color: white;
+  .profileImage{
+    display: inline-block;
   }
 
-  .profile_img{
-    height:140px;
-    align-self: flex-end;
-    width: 140px;
-    margin: 7px;
-    float: left;
-    object-fit: scale-down;
-    border-radius:'120px';
-    border: '7px solid white';
-  }
-  
   .username {
-    text-align: justify;  /* For Edge */
     text-align-last: left;
+    display: block;
+    padding-left: 15px;
+    margin: 0px;
+    padding: 0px;
+    padding-top: 7px;
   }
   
   .useremail {
-    text-align: justify; /* For Edge */
+    color: gray;
+    display: block;
+    margin: 0px;
+    padding: 0px;
     text-align-last: left;
   }
   .wrap{
     height: 140px;
     text-align-last: left;
   }
+.dividerProfile{
+  background-color: white;
+  height: 1px;
+}
+.itemContainer{
+  text-align: center;
+  align-content: center;
+  border: 1px solid white;
+  grid-gap: 15px;
+  margin: 7px;
+  max-width: 300px;
+  height: fit-content;
+  grid-column: auto;
 
+}
+.profileHeaders{
+  text-align-last: left;
+}
+.buttonAddBookAction{
+  display: inline;
+  width: 40px;
+  height: 40px;
+  font-size: x-large;
+  border-radius: 25px;
+}
+.no_books{
+  text-align-last: center;
+  color: gray;
+}
+.bookCover{
+  width:300px;
+  height: 200px;
+  object-fit: cover;
+  display: block;
+}
+.bookTileData{
+  text-align: left;
+  margin: 0%;
+  display: block;
+  max-lines: 3;
+  padding: 5px;
+  max-width: 200px;
+}
+.gridListDiv{
+  display: block;
+  text-align-last: left;
+  text-align: left;
+}
   
-  button{
+.bookContainer{
+  width: min-content;
+}
+  .buttonProfile{
     color:darkblue;
+    display: block;
     background-color: no;
     font-size: x-large;
     padding: 10px;

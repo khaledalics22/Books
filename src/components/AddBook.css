@@ -1,38 +1,37 @@
-body {
+/* body {
     background-color: #282c34;
     color: white;
     padding: 40px;
     font-family: Arial;
     text-align: center;
-  }
-h1{
-    font-size: 500%;
-}  
-label{
-    font-size: 200%;
-}
-.a {
-    text-align: justify;  /* For Edge */
-    text-align-last: center;
-  
-}
-.c {
-    text-align: justify;  /* For Edge */
-    text-align-last: center;
-   height: 40px;
-}
-.b {
-    text-align: justify;  /* For Edge */
-    text-align-last: center;
+  }   */
+.labelAddBook{
+    font-size: large;
+    display: block;
+    margin: 7px;
 }
 
-input{
+.container {
+    width: auto;
+    clear: both;
+    
+  }
+  
+.container input {
+    width: 100%;
+    clear: both;
+    
+  }
+.inputAddBook{
     height: 40px;
     font-size: large;
     font-family: 'Times New Roman', Times, serif;
     padding-left: 10px;
-    width: 800px;
+    width: 200px;
+    margin-top: 15px;
+    margin-bottom: 15px;
     text-align-last: left;
+    display: block;
 }
 a:link{
     color: white;
@@ -46,12 +45,15 @@ a:active{
 a:visited{
     color: white;
 }
-
-button{
+.inputFile{
+    margin: 15px;
+}
+.buttonAddBook{
     color:darkblue;
     background-color: white;
     font-size: x-large;
-    margin: 30px;
+    margin-top: 15px;
+    margin-bottom: 15px;
     padding: 10px;
     width: 200px;
     min-width: 300;
