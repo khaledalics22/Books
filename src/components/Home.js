@@ -6,6 +6,7 @@ import { Dropdown } from 'react-bootstrap';
 import { Icon, IconButton } from '@material-ui/core';
 import { AuthConext } from './firebase/auth.js';
 import Navbar from "./Navbar"
+import HomeBook from "./HomeBook"
 import "./Home.css"
 
 export  default function Home({ history }){
@@ -13,6 +14,7 @@ export  default function Home({ history }){
     return (
         <div>
             <Navbar history={history} currentUser={currentUser}/>
+            <HomeBook book={null}/>
         </div> 
         
     );
