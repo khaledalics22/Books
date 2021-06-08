@@ -12,7 +12,7 @@ import { icons } from "react-icons";
 
 const db = app.firestore();
 async function toggleLike(uid, book_id){
-  db.collection('user').doc(uid).get().then(async(doc)=>{
+  await db.collection('user').doc(uid).get().then(async(doc)=>{
       const likedBookIds = doc.data().liked_books;
       let likedList = [];
       likedBookIds?.forEach((id) => {
@@ -33,7 +33,7 @@ async function toggleLike(uid, book_id){
   })
 }
 async function toggleReading(uid, book_id){
-  db.collection('user').doc(uid).get().then(async(doc)=>{
+  await db.collection('user').doc(uid).get().then(async(doc)=>{
       const currReadingIds = doc.data().currently_reading;
       let readingList = [];
       currReadingIds?.forEach((id) => {
