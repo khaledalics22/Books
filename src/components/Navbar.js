@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import app from "./firebase/base.js";
 import "./Navbar.css";
-import me from "../me.jpg";
+import temp from "../user-circle-solid.svg"
 
 const Navbar = ({ history, currentUser }, ...props) => {
   const dropdownRef = useRef(null);
@@ -43,64 +43,42 @@ const Navbar = ({ history, currentUser }, ...props) => {
   };
 
   return (
-    <nav className="navBarItems">
-      <h1 className="title-nav">BookNerds</h1>
-      <div className="search-box">
-        <input
-          type="text"
-          value={searchText}
-          className="search-text"
-          name="searchText"
-          placeholder="Search books"
-          onChange={(e) => setSearchText(e.target.value)}
-        />
-        <a className="search-btn" href="#">
-          <i className="fas fa-search"></i>
-        </a>
-      </div>
-
-      <div className="items">
-        <Link to="/" className="home-nav">
-          Home
-        </Link>
-        <Link to="/mybooks" className="mybooks-nav">
-          MyBooks
-        </Link>
-        <Link to="/explore" className="explore-nav">
-          Explore
-        </Link>
-      </div>
-
-      <div className="menu-container">
-        <img
-          className="user-image-nav"
-          src={me}
-          onClick={() => setShowImageList(!showImageList)}
-        ></img>
-
-        <div
-          ref={dropdownRef}
-          className={`menu ${showImageList ? "active" : "inactive"}`}
-        >
-          <ul>
-            <li>
-              <div className="username-menu">Islam Ahmed</div>
-            </li>
-            <li>
-              <Link to="/profile" className="profile-menu">
-                Profile
-              </Link>
-            </li>
-            <li>
-              <Link to="/" onClick={handleLogOut}>
-                Log Out
-              </Link>
-            </li>
-          </ul>
+    <nav className="navBarItems">   
+        <h1 className="title-nav">BookNerds</h1>
+        
+        <div className="search-box">
+            <input
+            type="text"
+            value={searchText}
+            className="search-text"
+            name="searchText"
+            placeholder="Search books"
+            onChange={(e) => setSearchText(e.target.value)}
+            />
+            <a className="search-btn" href="#">
+            <i className="fas fa-search"></i>
+            </a>
         </div>
-      </div>
+
+        <div className="items">
+            <Link to='/' className='home-nav'>Home</Link>
+            <Link to='/mybooks' className='mybooks-nav'>MyBooks</Link>
+            <Link to='/explore' className='explore-nav'>Explore</Link>
+        </div>
+                
+        <div className="menu-container">     
+            <img  className='user-image-nav' src={currentUser?currentUser.picture_url:temp} onClick={() => setShowImageList(!showImageList)}></img>
+            <div ref={dropdownRef} className={`menu ${showImageList? 'active' : 'inactive'}`}>
+                <ul>
+                    <li><div className="username-menu">{currentUser?.name}</div></li>
+                    <li><Link to="/profile" className="profile-menu">Profile</Link></li>
+                    <li><Link onClick={handleLogOut}>Log Out</Link></li>
+                </ul>
+            </div>
+        </div>
+
     </nav>
-  );
+    );
 };
 
 export default Navbar;
