@@ -22,7 +22,7 @@ const Review = (props) => {
       });
   }, []);
   return (
-    <div className="review-container">
+    <div className="review-container mt-3">
       <div className="comment">
         <img
           className="d-flex g-width-50 g-height-50 rounded-circle g-mt-3 g-mr-15"

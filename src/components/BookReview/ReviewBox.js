@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { AuthConext } from "../firebase/auth.js";
 import app from "../firebase/base.js";
 
@@ -17,18 +17,21 @@ const ReviewBox = (props) => {
         user_id: currentUser.uid,
         content: review,
       };
-      console.log(reviewObject);
-      db.collection("review").doc().set(reviewObject);
-      e.target.elements.review.value = "";
-      fetchReviews();
+      db.collection("review")
+        .doc()
+        .set(reviewObject)
+        .then(() => {
+          console.log("Done");
+          e.target.elements.review.value = "";
+          fetchReviews();
+        });
     }
   };
-
   return (
     currentUser && (
       <form onSubmit={addReview} className="review-form">
         <div className="form-group review-input">
-          <label for="addReview" className="review-label">
+          <label htmlFor="addReview" className="review-label">
             Add a review
           </label>
           <input

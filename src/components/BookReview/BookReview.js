@@ -6,12 +6,14 @@ import { AuthConext } from "../firebase/auth.js";
 import Navbar from "../Navbar";
 import ReviewBox from "./ReviewBox";
 import Review from "./Review";
+import Rating from "react-rating";
 
 const db = app.firestore();
 
 const BookReview = ({ history }) => {
   const { bookId } = useParams();
   const [book, setBook] = useState({});
+  const [rating, setRating] = useState(0);
   const [reviews, setReviews] = useState([]);
   const { currentUser } = useContext(AuthConext);
 
@@ -33,7 +35,14 @@ const BookReview = ({ history }) => {
         console.error(err);
       });
   };
-
+  const handleRating = (value) => {
+    console.log(value);
+    setRating(value);
+    setBook({ ...book, rating: value });
+    db.collection("book")
+      .doc(bookId)
+      .set({ ...book, rating: value });
+  };
   useEffect(() => {
     // db.collection("book")
     //   .get()
@@ -44,13 +53,13 @@ const BookReview = ({ history }) => {
     //   })
     //   .catch((err) => {
     //     console.error(err);
-    //   });
+    //   })
     db.collection("book")
       .doc(bookId)
       .get()
       .then((book) => {
-        console.log(book.data());
         setBook(book.data());
+        setRating(book.data().rating);
       })
       .catch((err) => {
         console.error(err);
@@ -70,6 +79,13 @@ const BookReview = ({ history }) => {
             <h1 className="italic">{book.title}</h1>
             <h4 className="author-name">{book.author_name}</h4>
             <p>{book.description}</p>
+            <Rating
+              emptySymbol="fa fa-star-o fa-2x"
+              fullSymbol="fa fa-star fa-2x"
+              fractions="10"
+              initialRating={rating}
+              onChange={handleRating}
+            />
           </div>
         </div>
       </div>

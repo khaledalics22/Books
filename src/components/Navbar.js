@@ -55,7 +55,7 @@ const Navbar = ({ history, currentUser }, ...props) => {
           onChange={(e) => setSearchText(e.target.value)}
         />
         <a className="search-btn" href="#">
-          <i class="fas fa-search"></i>
+          <i className="fas fa-search"></i>
         </a>
       </div>
 
@@ -92,7 +92,9 @@ const Navbar = ({ history, currentUser }, ...props) => {
               </Link>
             </li>
             <li>
-              <Link onClick={handleLogOut}>Log Out</Link>
+              <Link to="/" onClick={handleLogOut}>
+                Log Out
+              </Link>
             </li>
           </ul>
         </div>
