@@ -11,18 +11,26 @@ import AddBook from "./components/AddBook";
 import BookReview from "./components/BookReview/BookReview";
 import Navbar from "./components/Navbar";
 
+const DefaultComponents = () => {
+  return (
+    <>
+      <Navbar />
+      <PrivateRoute exact path="/" component={Home} />
+      <Route exact path="/profile" component={Profile} />
+      <Route exact path="/add-book" component={AddBook} />
+      <Route exact path="/reviews/:bookId" component={BookReview} />
+    </>
+  );
+};
+
 function App() {
   return (
     <AuthProvider>
       <Router>
-        <Navbar />
         <Switch>
-          <PrivateRoute exact path="/" component={Home} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/signup" component={SignUp} />
-          <Route exact path="/profile" component={Profile} />
-          <Route exact path="/add-book" component={AddBook} />
-          <Route exact path="/reviews/:bookId" component={BookReview} />
+          <Route component={DefaultComponents} />
         </Switch>
       </Router>
     </AuthProvider>
