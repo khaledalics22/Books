@@ -4,7 +4,7 @@ import app from "./firebase/base.js";
 import "./Navbar.css";
 import me from "../me.jpg"
 
-const Navbar = ({history, currentUser}, ...props) => {
+const Navbar = ({history, currentUser,search}, ...props) => {
     const dropdownRef = useRef(null);
     const [searchText, setSearchText] = useState('');
     const [showImageList, setShowImageList] = useState(false);
@@ -26,7 +26,6 @@ const Navbar = ({history, currentUser}, ...props) => {
     
       }, [showImageList, dropdownRef]);
 
-    console.log(currentUser);
 
     const handleLogOut = () => {
         app.auth().signOut().then(() => {
@@ -44,7 +43,7 @@ const Navbar = ({history, currentUser}, ...props) => {
                     name="searchText" placeholder="Search books" 
                     onChange={(e) => setSearchText(e.target.value)}
                 />
-                <a className="search-btn" href="#">
+                <a className="search-btn" href="#" onClick={() => search(searchText)}>
                     <i class="fas fa-search"></i>
                 </a>
             </div>
