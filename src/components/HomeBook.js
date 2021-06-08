@@ -1,7 +1,6 @@
 import React from 'react'
 import "./HomeBook.css";
 import {Link } from "react-router-dom";
-import harry from "../harry.jpg"
 
 const HomeBook = ({book}) => {
     return (

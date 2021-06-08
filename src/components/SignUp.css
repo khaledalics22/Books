@@ -1,18 +1,33 @@
 .bodySignUp {
-    background-color: #282c34;
+    background-color: #0D47A1;
     color: white;
     padding: 40px;
     font-family: Arial;
     text-align: center;
+
   }
 .labelSignUp{
     font-size: x-large;
     display: block;
     margin: 15px;
+    
 }
+.userType{
+    font-size: x-large;
+    margin: 15px;
+    
+}
+
 .inputSignUp{
     display: block;
     height: 40px;
+    font-size: large;
+    font-family: 'Times New Roman', Times, serif;
+}
+.inputFile{
+    display: block;
+    height: 40px;
+    text-align-last: center;
     font-size: large;
     font-family: 'Times New Roman', Times, serif;
 }
@@ -21,6 +36,12 @@
     width: auto;
     clear: both;
 
+}
+.formSingUp{
+    padding: 60px;
+    width: 400px;
+    margin: 30px;
+    background-color: #282c34;
 }
 .container3 input {
     width: 100%;

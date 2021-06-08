@@ -31,9 +31,9 @@ const Login = ({ history }) => {
   return (
     <render >
       <body className="bodyLogin">
-        <h6 name='login' style={{fontSize:'xx-large'}}>Login</h6>
+        <h1 name='login'>Login</h1>
         <div class="container2">
-            <form style={{display:'inline-block'}} onSubmit={handleLogin}>
+            <form className="formLogin" style={{display:'inline-block'}} onSubmit={handleLogin}>
                 <label className="labelLogin"> Email </label> 
                 <input className="inputLogin" name="email" type="label" placeholder="Email" /> 
                 <label className="labelLogin"> Password </label> 
@@ -42,7 +42,7 @@ const Login = ({ history }) => {
                 <Link className="loginLink" to="/signup">Don't have email? SignUP!</Link>
             </form>
         </div>
-        </body>
+      </body>
     </render>
   );
 };

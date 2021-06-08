@@ -1,20 +1,31 @@
-import React , {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import app from "./base";
 
-export const  AuthConext  =  React.createContext(); 
+export const AuthConext = React.createContext();
 
+export const AuthProvider = ({ children }) => {
+  const [currentUser, setCurrentUser] = useState(
+    JSON.parse(localStorage.getItem("authUser"))
+  );
 
-export const  AuthProvider = ({children})=>{
-    const [currentUser, setCurrentUser] = useState(null); 
-
-    useEffect(()=>{
-         app.auth().onAuthStateChanged(setCurrentUser); 
-    },[]);
-    return (
-        <AuthConext.Provider
-         value = {{currentUser}}
-        >{children}</AuthConext.Provider>
-    );
+  useEffect(() => {
+    app.auth().onAuthStateChanged((authUser) => {
+      if (authUser) {
+        console.log(authUser);
+        setCurrentUser(authUser);
+        return localStorage.setItem("authUser", JSON.stringify(authUser));
+      } else {
+        setCurrentUser(null);
+        return localStorage.removeItem("authUser");
+      }
+    });
+    app.auth().onAuthStateChanged(setCurrentUser);
+  }, []);
+  return (
+    <AuthConext.Provider value={{ currentUser }}>
+      {children}
+    </AuthConext.Provider>
+  );
 };
 
-export default AuthProvider 
+export default AuthProvider;
