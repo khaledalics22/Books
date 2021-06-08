@@ -71,19 +71,19 @@ export default function Profile({ history}){
     if(booksResponse!=null&&booksResponse?.length>0){
         booksView = <div >
         <Divider style={{backgroundColor:'white', height:'1px'}} />
-        <GridList cellHeight="auto" maxWidth="200px" spacing="0px" cols={4} style={{textAlign:'left', textAlignLast:'left'}}>
+        <GridList  maxWidth="200px" spacing="0px" cols={4} style={{textAlign:'left', textAlignLast:'left'}}>
                {booksResponse?.map((book) => (
-               <div className='itemContainer'>
-                 <img src={book.cover_url} className="bookCover"/>
-                 <p className="bookTileData" style={{fontSize:"22px"}}>{book.title}</p>
-                 <p className="bookTileData" style={{color:'gray'}}>Category: {book.category}</p>
-                 <p className="bookTileData" style={{color:'gray'}}>Author: {book.author_name}</p>
-                 <p className="bookTileData" style={{color:'gray'}}>{book.description}</p> 
-                  <Rating initialRating={`${book?.rating}`} emptySymbol={<Container style={{backgroundColor:"white"}}></Container>} /> 
-            </div>
+                <GridListTile className='itemContainer' >
+                    <img src={book.cover_url} alt={book.title} className="bookCover" />
+                    <GridListTileBar
+                    title={book.title}
+                    subtitle={book.author_name}
+                    />
+                 </GridListTile>
+                 
          ))}
         </GridList >
-        <Divider style={{backgroundColor:'white', height:'1px'}}/>
+        {/* <Divider style={{backgroundColor:'white', height:'1px'}}/> */}
         </div>;
     }else {
         booksView = <p className="no_books">No Books Published Yet!</p>;
@@ -92,18 +92,18 @@ export default function Profile({ history}){
     if(likedBooksResponse!=null&&likedBooksResponse?.length>0){
         likedBooks = <div >
         <Divider style={{backgroundColor:'white', height:'1px'}} />
-        <GridList cellHeight="auto" maxWidth="200px" spacing="0px" cols={4} style={{textAlign:'left', textAlignLast:'left'}}>
+        <GridList maxWidth="200px" spacing="0px" cols={4} style={{textAlign:'left', textAlignLast:'left'}}>
             {likedBooksResponse?.map((book) => (
-            <div className='likedItemContainer'>
-                <img src={book.cover_url} className="likedBooks"/>
-                <p className="likedbookTitle" >{book.title}</p>
-                <p className="likedbookTileData">Category: {book.category}</p>
-                <p className="likedbookTileData">Author: {book.author_name}</p>
-                <p className="likedbookTileData">{book.description}</p> 
-            </div>
+                 <GridListTile className='likedItemContainer' >
+                 <img src={book.cover_url} alt={book.title} className="likedBooks" />
+                 <GridListTileBar
+                 title={book.title}
+                 subtitle={book.author_name}
+                 />
+              </GridListTile>
          ))}
         </GridList >
-        <Divider style={{backgroundColor:'white', height:'1px'}}/>
+        {/* <Divider style={{backgroundColor:'white', height:'1px'}}/> */}
         </div>;
     }else {
         likedBooks = <p className="no_books">No liked books Yet!</p>;
@@ -129,6 +129,8 @@ export default function Profile({ history}){
                     }}>+</button>
             {booksView}
             <h2 className="profileHeaders">Liked Books</h2>
+            {likedBooks}
+            <h2 className="profileHeaders">Currently Reading</h2>
             {likedBooks}
             </body>
         </render>

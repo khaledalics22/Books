@@ -29,16 +29,16 @@
   font-size: large;
   font-family: 'Times New Roman', Times, serif;
 }
-a:link{
+a.loginLink:link{
   color: white;
 }
-a:hover{
+a.loginLink:hover{
   color: white;
 }
-a:active{
+a.loginLink:active{
   color: white;
 }
-a:visited{
+a.loginLink:visited{
   color: white;
 }
 

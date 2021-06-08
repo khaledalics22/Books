@@ -33,21 +33,7 @@
     text-align-last: left;
     display: block;
 }
-a:link{
-    color: white;
-}
-a:hover{
-    color: white;
-}
-a:active{
-    color: white;
-}
-a:visited{
-    color: white;
-}
-.inputFile{
-    margin: 15px;
-}
+
 .buttonAddBook{
     color:darkblue;
     background-color: white;

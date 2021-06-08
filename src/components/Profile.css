@@ -34,7 +34,7 @@
     text-align-last: left;
   }
 .dividerProfile{
-  background-color: white;
+  background-color: gray;
   height: 1px;
 }
 .itemContainer{
@@ -45,37 +45,36 @@
   margin: 7px;
   background-color: white;
   max-width: 200px;
-  height:auto;
+  height:300px;
+  max-height: 300px;
   grid-column: auto;
 
 }
 .profileHeaders{
-  text-align-last: left;
+  display: inline-block;
 }
 .likedItemContainer{
-  text-align-last: left;
-  display: table;
   text-align: center;
   align-content: center;
   border: 1px solid white;
   grid-gap: 15px;
-  background-color: white;
   margin: 7px;
-  max-width: 100px;
-  height: fit-content;
+  background-color: white;
+  max-width: 150px;
+  height:200px;
+  max-height: 200px;
   grid-column: auto;
 }
 .likedBooks{
-  width:fit-content;
-  height: 100px;
-  max-width: 150px;
+  width:150px;
+  height: 200px;
   object-fit: cover;
   display: block;
 }
 .buttonAddBookAction{
-  display: inline;
   width: 40px;
   height: 40px;
+  margin: 7px;
   font-size: x-large;
   border-radius: 25px;
 }
@@ -85,7 +84,7 @@
 }
 .bookCover{
   width:200px;
-  height: 150px;
+  height: 300px;
   object-fit: cover;
   display: block;
 }

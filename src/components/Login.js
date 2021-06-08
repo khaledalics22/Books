@@ -39,7 +39,7 @@ const Login = ({ history }) => {
                 <label className="labelLogin"> Password </label> 
                 <input className="inputLogin" name="password" type="password" placeholder="Password" /> 
                 <button className="buttonLogin" type="submit">Login</button><br/>
-                <Link to="/signup">Don't have email? SignUP!</Link>
+                <Link className="loginLink" to="/signup">Don't have email? SignUP!</Link>
             </form>
         </div>
         </body>

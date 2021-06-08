@@ -27,16 +27,16 @@
     clear: both;
 
 }
-a:link{
+a.signUpLink:link{
     color: white;
 }
-a:hover{
+a.signUpLink:hover{
     color: white;
 }
-a:active{
+a.signUpLink:active{
     color: white;
 }
-a:visited{
+a.signUpLink:visited{
     color: white;
 }
 

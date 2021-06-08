@@ -60,7 +60,7 @@ const SignUp = ({ history }) => {
                   <label className="labelSignUp">Choose Image</label>
                   <input className="inputSignUp" type="file" id="file" onChange={handleChange} />
                   <button className="buttonSignUp" type="submit">Sign Up</button><br/>
-                  <Link to="/login">Already have email? Login!</Link>
+                  <Link className="signUpLink" to="/login">Already have email? Login!</Link>
               </form>
           </div>
           </body>
