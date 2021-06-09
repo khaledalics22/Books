@@ -11,13 +11,18 @@ const Login = ({ history }) => {
     async event => {
       event.preventDefault();
       const { email, password } = event.target.elements;
-      try {
-        await app
+      if(email?.value?.length>0 && password?.value?.length>0){
+
+        try {
+          await app
           .auth()
           .signInWithEmailAndPassword(email.value, password.value);
-        history.push("/");
-      } catch (error) {
-        alert(error);
+          history.push("/");
+        } catch (error) {
+          alert(error);
+        }
+      }else{
+        alert('invalid inputs');
       }
     },
     [history]

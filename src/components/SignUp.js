@@ -2,53 +2,63 @@ import React, { useCallback } from "react";
 import { withRouter, Link } from "react-router-dom";
 import app from "./firebase/base";
 import "./SignUp.css";
-
+import logo from '../logo.svg'
 const SignUp = ({ history }) => {
+  var image;
+  var userType; 
   const handleSignUp = useCallback(async event => {
     event.preventDefault();
     const {name, email, password } = event.target.elements;
+
+   if(image&&(userType=='author' || userType=='reader')&&name?.value?.length>0 && email?.value?.length>0 && password?.value?.length>0){
+    let user; 
     try {
-      await app
-        .auth()
-        .createUserWithEmailAndPassword(email.value, password.value).then((user)=>{
-          handleUpload(user.user,name,email); 
-         });
+      let url;
+      let response = await app
+      .auth()
+      .createUserWithEmailAndPassword(email.value, password.value);
+      user = response.user; 
+      url = await handleUpload(user,name,email); 
+      const db = app.firestore();
+
+      await db.collection('user').doc(user.uid)
+      .set({name: name.value,email:email.value, picture_url:url,user_type:userType,
+      liked_books:[],currently_raeding:[]}); 
+      history.push("/");
     } catch (error) {
+      if(user){
+         await user.delete();
+      }
       alert(error);
     }
-  }, [history]);
-  var image;
+  }else{alert('Invalid Inputs');}}, [history]);
   const handleChange =  useCallback(e=>{
     if(e.target.files[0]){
         image = e.target.files[0];
     }
+    else{
+      image = logo; 
+    }
   },[history]);
-  var userType; 
   function setUserType(type){
     userType = type; 
   }
   // upload image 
-  const handleUpload = (user, name,email ) =>{
+  const handleUpload = async (user, name,email ) =>{
     // console.log(this.state.image);
     let file =  image;
-    
     var storage = app.storage();
     var storageRef = storage.ref();
     var uploadTask = storageRef.child('folder/' + file.name).put(file);
   
-    uploadTask.then(async () =>{
+    let downUrl; 
+    await uploadTask.then(async () =>{
         // uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) =>{
-        uploadTask.snapshot.ref.getDownloadURL().then(async (url) =>{
-          const db = app.firestore();
-          console.log(name.value);
-          // console.log(user.uid);
-          // alert('add user data'+user); 
-          await db.collection('user').doc(user.uid)
-          .set({name: name.value,email:email.value, picture_url:url,user_type:userType,
-            liked_books:[],currently_raeding:[]}); 
-          history.push("/");
+        await uploadTask.snapshot.ref.getDownloadURL().then(async (url) =>{
+          downUrl =url; 
         });
      });
+     return downUrl; 
     };
 
   return (
