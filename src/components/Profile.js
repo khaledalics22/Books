@@ -11,6 +11,7 @@ import {
   Container,
   colors,
 } from "@material-ui/core";
+import {Link } from "react-router-dom";
 import Rating from "react-rating";
 import ReactRoundedImage from "react-rounded-image";
 import Navbar from "./Navbar";
@@ -28,11 +29,13 @@ function getBooksView(booksArray) {
         >
           {booksArray?.map((book) => (
             <GridListTile className="likedItemContainer">
-              <img
-                src={book.cover_url}
-                alt={book.title}
-                className="likedBooks"
-              />
+              <Link to={`/reviews/${book.book_id}`}>
+                <img
+                  src={book.cover_url}
+                  alt={book.title}
+                  className="likedBooks"
+                />
+              </Link>
               <GridListTileBar title={book.title} subtitle={book.author_name} />
             </GridListTile>
           ))}
@@ -75,6 +78,7 @@ export default function Profile({ history }) {
                   const liked = [];
                   result.forEach((doc) => {
                     liked.push({
+                      book_id: doc.data().book_id,
                       title: doc.data()?.title,
                       description: doc.data()?.description,
                       author_name: doc.data()?.author_name,
@@ -99,6 +103,7 @@ export default function Profile({ history }) {
                   const curr = [];
                   result?.forEach((doc) => {
                     curr.push({
+                      book_id: doc.data().book_id,
                       title: doc.data()?.title,
                       description: doc.data()?.description,
                       author_name: doc.data()?.author_name,

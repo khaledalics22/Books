@@ -6,7 +6,6 @@ import "./Home.css";
 export default function Home({ history }) {
   const db = app.firestore();
   const [books, setBooks] = useState([]);
-  const [scrolling, setScrolling] = useState(false);
   const [scrollTop, setScrollTop] = useState(0);
   const [reachedBottom, setReachedBottom] = useState(false);
   const [lastDoc, setLastDoc] = useState(null);
@@ -63,7 +62,6 @@ export default function Home({ history }) {
       }
       // console.log(hasReachedBottom());
       setScrollTop(e.target.documentElement.scrollTop);
-      setScrolling(e.target.documentElement.scrollTop > scrollTop);
     };
     window.addEventListener("scroll", onScroll);
 

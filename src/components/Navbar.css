@@ -7,6 +7,7 @@
   font-size: 1.2em;
   position: fixed;
   top: 0px;
+  z-index: 100;
 }
 
 .title-nav {
@@ -99,6 +100,7 @@
 .menu-container {
   position: relative;
   margin-right: 2rem;
+  z-index: 100;
 }
 
 .menu {
