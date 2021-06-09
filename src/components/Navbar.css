@@ -10,6 +10,10 @@
   z-index: 100;
 }
 
+.title-link {
+  text-decoration: none;
+}
+
 .title-nav {
   color: #fff;
   justify-self: flex-start;

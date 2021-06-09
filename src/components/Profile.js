@@ -12,9 +12,8 @@ import {
   colors,
 } from "@material-ui/core";
 import {Link } from "react-router-dom";
-import Rating from "react-rating";
 import ReactRoundedImage from "react-rounded-image";
-import Navbar from "./Navbar";
+
 
 function getBooksView(booksArray) {
   if (booksArray != null && booksArray?.length > 0) {

@@ -80,7 +80,9 @@ const Navbar = ({ search }, ...props) => {
 
   return (
     <nav className="navBarItems">
-      <h1 className="title-nav">BookNerds</h1>
+      <Link to="/" className="title-link">
+        <h1 className="title-nav">BookNerds</h1>
+      </Link>
 
       <div className="search-box">
         <input
