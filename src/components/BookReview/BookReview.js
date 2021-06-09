@@ -138,8 +138,28 @@ const BookReview = ({ history }) => {
       });
   };
 
+  const checkLikedReading = () => {
+    db.collection("user")
+      .doc(currentUser.uid)
+      .get()
+      .then((doc) => {
+        const likedBookIds = doc.data().liked_books;
+        const currReadingIds = doc.data().currently_reading;
+
+        if (likedBookIds.indexOf(bookId) !== -1) {
+          setLiked(true);
+        }
+        if (currReadingIds.indexOf(bookId) !== -1) {
+          setReading(true);
+        }
+      });
+  };
+
   useEffect(() => {
-    if (currentUser) fetchUser();
+    if (currentUser) {
+      checkLikedReading();
+      fetchUser();
+    }
     fetchReviews();
   }, [bookId]);
 
