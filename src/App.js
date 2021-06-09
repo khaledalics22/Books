@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useRef } from "react";
 import "./App.css";
 import { AuthProvider } from "./components/firebase/auth";
 import PrivateRoute from "./components/PrivateRoute";

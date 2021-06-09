@@ -30,7 +30,7 @@ const Navbar = ({ search }, ...props) => {
   };
 
   useEffect(() => {
-    getUser();
+    if (currentUser) getUser();
     console.log(props);
     const pageClickEvent = (e) => {
       if (

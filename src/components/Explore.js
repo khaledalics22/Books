@@ -1,7 +1,6 @@
 import { useState, useEffect, useContext } from "react";
 import "./Explore.css";
 import app from "./firebase/base.js";
-import { Link } from "react-router-dom";
 import Navbar from "./Navbar";
 import { AuthConext } from "./firebase/auth.js";
 import HomeBook from "./HomeBook";
