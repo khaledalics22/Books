@@ -1,6 +1,7 @@
 .categoriesContainer {
   width: 20%;
   background-color: AliceBlue;
+  border-radius: 5%;
   position: fixed;
   height: auto;
   right: 0;

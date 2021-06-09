@@ -10,7 +10,7 @@ const orders = [
   { Name: "Author Name", order: "author_name" },
   { Name: "Rating", order: "rating" },
 ];
-const Explore = ({ history }) => {
+const Explore = ({ history, searchText }) => {
   const { currentUser } = useContext(AuthConext);
   const db = app.firestore();
   const [categories, setCategories] = useState();
@@ -152,22 +152,14 @@ const Explore = ({ history }) => {
       </ul>
     </div>
   );
-  const onClickSearch = (searchText) => {
-    console.log(searchText);
-    getBooks(orderBy, searchText, "");
-  };
+  let [searchtext] = useState(searchText || "");
 
   useEffect(() => {
     getCategory();
-    getBooks(orderBy, "", "");
+    getBooks(orderBy, searchtext, "");
   }, []);
   return (
     <>
-      <Navbar
-        history={history}
-        currentUser={currentUser}
-        search={onClickSearch}
-      />
       {orderByChecked}
       {booksList}
       {categoriesList}
