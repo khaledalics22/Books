@@ -86,6 +86,7 @@ const BookReview = ({ history }) => {
       .get()
       .then((doc) => {
         const likedBookIds = doc.data().liked_books;
+        console.log(likedBookIds);
         let likedList = [];
         likedBookIds?.forEach((id) => {
           likedList.push(id);
@@ -93,15 +94,16 @@ const BookReview = ({ history }) => {
         let idx = likedList.indexOf(bookId);
         if (idx != -1) {
           likedList.splice(idx, 1);
-          setLiked(true);
         } else {
           likedList.push(bookId);
-          setLiked(false);
         }
+
+        setLiked(!liked);
 
         if (likedList == null || likedList.length == 0) {
           likedList = [];
         }
+        console.log(likedList);
         db.collection("user")
           .doc(currentUser.uid)
           .update({ liked_books: likedList });
@@ -121,11 +123,11 @@ const BookReview = ({ history }) => {
         let idx = readingList.indexOf(bookId);
         if (idx != -1) {
           readingList.splice(idx, 1);
-          setReading(true);
         } else {
           readingList.push(bookId);
-          setReading(false);
         }
+
+        setReading(!reading);
 
         if (readingList == null || readingList.length == 0) {
           readingList = [];
