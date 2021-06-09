@@ -110,7 +110,13 @@ const Navbar = ({ search }, ...props) => {
                 <div className="username-menu">{user?.name}</div>
               </li>
               <li>
-                <Link to="/profile" className="profile-menu">
+                <Link
+                  to="/profile"
+                  className="profile-menu"
+                  onClick={() => {
+                    setShowImageList(!showImageList);
+                  }}
+                >
                   Profile
                 </Link>
               </li>

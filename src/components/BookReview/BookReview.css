@@ -4,7 +4,7 @@
   margin: 2rem 0 0 0;
   color: white;
 }
-.ActionButton{
+.ActionButton {
   background-color: DodgerBlue; /* Blue background */
   border: none; /* Remove borders */
   color: white; /* White text */
@@ -90,7 +90,7 @@
 }
 .review-container .comment {
   display: flex;
-  justify-content: center;
+  padding: 1rem;
   align-items: center;
   width: 70%;
   background: #282c34;
@@ -101,6 +101,7 @@
 .h5 {
   margin-right: 1.07143rem;
   font-weight: bold;
+  width: 20%;
 }
 
 .review-content {
