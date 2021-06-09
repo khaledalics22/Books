@@ -1,19 +1,15 @@
 import { useState, useEffect, useContext } from "react";
 import "./Explore.css";
 import app from "./firebase/base.js";
-import { Link } from "react-router-dom";
 import Navbar from "./Navbar";
 import { AuthConext } from "./firebase/auth.js";
 import HomeBook from "./HomeBook";
-
 const orders = [
-  { Name: "Likes", order: "likes" },
   { Name: "Title", order: "title" },
   { Name: "Author Name", order: "author_name" },
   { Name: "Rating", order: "rating" },
 ];
-
-const Explore = ({ history }) => {
+const Explore = ({ history, searchText }) => {
   const { currentUser } = useContext(AuthConext);
   const db = app.firestore();
   const [categories, setCategories] = useState();
@@ -123,47 +119,50 @@ const Explore = ({ history }) => {
     setCheckedState(updatedCheckedState);
 
     updatedCheckedState.forEach((item, index) => {
-      if (item === true) setOrderBy(orders[index].order);
+      if (item === true) {
+        setOrderBy(orders[index].order);
+        books.sort((a, b) => {
+          if (a[orders[index].order] < b[orders[index].order]) return -1;
+          if (a[orders[index].order] > b[orders[index].order]) return 1;
+          return 0;
+        });
+      }
     });
   };
+
   let [orderBy, setOrderBy] = useState("title");
+
   const orderByChecked = (
     <div className="checkBoxes">
       <label>Order By</label>
       <ul>
-        {orders.map(({ Name, order }, index) => {
-          <li key={index}>
-            <input
-              onChange={() => handleOnChange(index)}
-              checked={checkedState[index]}
-              type="checkbox"
-            />
-            {Name}
-          </li>;
+        {orders.map((order, index) => {
+          return (
+            <li key={index}>
+              <input
+                onChange={() => handleOnChange(index)}
+                checked={checkedState[index]}
+                type="checkbox"
+              />
+              {order.Name}
+            </li>
+          );
         })}
       </ul>
     </div>
   );
-  const onClickSearch = (searchText) => {
-    console.log(searchText);
-    getBooks(orderBy, searchText, "");
-  };
+  let [searchtext] = useState(searchText || "");
 
   useEffect(() => {
     getCategory();
-    getBooks("title", "", "");
-  }, []);
+    getBooks(orderBy, searchtext, "");
+  }, [searchtext]);
   return (
-    <render>
-      <Navbar
-        history={history}
-        currentUser={currentUser}
-        search={onClickSearch}
-      />
-      {categoriesList}
-      {booksList}
+    <>
       {orderByChecked}
-    </render>
+      {booksList}
+      {categoriesList}
+    </>
   );
 };
 

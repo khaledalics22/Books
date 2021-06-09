@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, useContext } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { Link, useHistory, useLocation } from "react-router-dom";
 import app from "./firebase/base.js";
 import "./Navbar.css";
 import temp from "../user-circle-solid.svg";
@@ -14,7 +14,7 @@ const Navbar = ({ search }, ...props) => {
   const [searchText, setSearchText] = useState("");
   const [showImageList, setShowImageList] = useState(false);
   let history = useHistory();
-
+  let location = useLocation();
   const getUser = () => {
     db.collection("user")
       .doc(currentUser.uid)
@@ -30,7 +30,7 @@ const Navbar = ({ search }, ...props) => {
   };
 
   useEffect(() => {
-    getUser();
+    if (currentUser) getUser();
     console.log(props);
     const pageClickEvent = (e) => {
       if (
@@ -62,6 +62,20 @@ const Navbar = ({ search }, ...props) => {
       });
   };
 
+  const searchIcon = ()=> 
+    {
+      if (location.pathname !== '/explore')
+        {
+          console.log('1');
+        return <Link to="/explore" className="fas fa-search" onClick={() => search(searchText)}></Link>
+        }
+        else 
+        {
+          console.log('0');
+          return  <i className="fas fa-search" onClick={() => search(searchText)}/>
+        }
+      }
+  
   return (
     <nav className="navBarItems">
       <h1 className="title-nav">BookNerds</h1>
@@ -76,7 +90,7 @@ const Navbar = ({ search }, ...props) => {
           onChange={(e) => setSearchText(e.target.value)}
         />
         <a className="search-btn" href="#">
-          <i className="fas fa-search" onClick={() => search(searchText)}></i>
+        {searchIcon()}
         </a>
       </div>
 
@@ -110,7 +124,13 @@ const Navbar = ({ search }, ...props) => {
                 <div className="username-menu">{user?.name}</div>
               </li>
               <li>
-                <Link to="/profile" className="profile-menu">
+                <Link
+                  to="/profile"
+                  className="profile-menu"
+                  onClick={() => {
+                    setShowImageList(!showImageList);
+                  }}
+                >
                   Profile
                 </Link>
               </li>

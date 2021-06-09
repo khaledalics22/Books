@@ -172,8 +172,6 @@ export default function Profile({ history }) {
 
   return (
     <render>
-      
-      <Navbar history={history} currentUser={currentUser}/>
       <div>
         <body className="profileBody">
           <br/>

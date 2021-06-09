@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useRef, useState } from "react";
 import "./App.css";
 import { AuthProvider } from "./components/firebase/auth";
 import PrivateRoute from "./components/PrivateRoute";
@@ -13,14 +13,19 @@ import BookReview from "./components/BookReview/BookReview";
 import Navbar from "./components/Navbar";
 
 const DefaultComponents = () => {
+  const [searchText,setSearchText] = useState("");
+  const search = (searchText) =>
+  {
+    setSearchText(searchText);
+  }
   return (
     <>
-      <Navbar />
+      <Navbar search={search} />
       <PrivateRoute exact path="/" component={Home} />
       <Route exact path="/profile" component={Profile} />
       <Route exact path="/add-book" component={AddBook} />
       <Route exact path="/reviews/:bookId" component={BookReview} />
-      <Route exact path="/explore" component={Explore} />
+      <Route exact path="/explore" render={(props) => <Explore {...props} searchText={searchText}/>} />
     </>
   );
 };
