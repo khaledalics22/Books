@@ -105,6 +105,15 @@ const Navbar = ({ search }, ...props) => {
         <Link to="/explore" className="explore-nav">
           Explore
         </Link>
+        {!currentUser && (
+          <div className="login-signup-container">
+              <Link to="/login" className="login-nav">
+              Login
+            </Link>
+            <Link to="/signup" className="signup-nav">
+              Sign up
+            </Link>
+          </div>)}
       </div>
 
       {currentUser && (

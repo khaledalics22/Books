@@ -60,13 +60,18 @@
 }
 
 .items {
-  display: grid;
-  grid-template-columns: repeat(4, auto);
+  display: flex;
+  flex-direction:row;
   list-style: none;
   color: #fff;
   text-align: center;
   align-content: center;
   margin: 0px 20px;
+}
+
+.login-signup-container {
+  display: flex;
+  flex-direction:row;
 }
 
 .items a {

@@ -189,7 +189,7 @@ export default function Profile({ history }) {
           <h5 className="useremail">{user?.email}</h5>
           <h5 className="useremail">
             {" > "}
-            {user?.user_type}
+            {user?.user_type || "reader"}
           </h5>
        
         {publishedBooks}
