@@ -146,10 +146,10 @@ const BookReview = ({ history }) => {
         const likedBookIds = doc.data().liked_books;
         const currReadingIds = doc.data().currently_reading;
 
-        if (likedBookIds.indexOf(bookId) !== -1) {
+        if (likedBookIds?.indexOf(bookId) !== -1) {
           setLiked(true);
         }
-        if (currReadingIds.indexOf(bookId) !== -1) {
+        if (currReadingIds?.indexOf(bookId) !== -1) {
           setReading(true);
         }
       });
