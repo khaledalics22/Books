@@ -120,7 +120,14 @@ const Explore = ({ history }) => {
     setCheckedState(updatedCheckedState);
 
     updatedCheckedState.forEach((item, index) => {
-      if (item === true) setOrderBy(orders[index].order);
+      if (item === true) {
+        setOrderBy(orders[index].order);
+        books.sort((a, b) => {
+          if (a[orders[index].order] < b[orders[index].order]) return -1;
+          if (a[orders[index].order] > b[orders[index].order]) return 1;
+          return 0;
+        });
+      }
     });
   };
 
@@ -152,7 +159,7 @@ const Explore = ({ history }) => {
 
   useEffect(() => {
     getCategory();
-    getBooks("title", "", "");
+    getBooks(orderBy, "", "");
   }, []);
   return (
     <>
