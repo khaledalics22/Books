@@ -5,7 +5,6 @@ import Navbar from "./Navbar";
 import { AuthConext } from "./firebase/auth.js";
 import HomeBook from "./HomeBook";
 const orders = [
-  { Name: "Likes", order: "likes" },
   { Name: "Title", order: "title" },
   { Name: "Author Name", order: "author_name" },
   { Name: "Rating", order: "rating" },
@@ -157,7 +156,7 @@ const Explore = ({ history, searchText }) => {
   useEffect(() => {
     getCategory();
     getBooks(orderBy, searchtext, "");
-  }, []);
+  }, [searchtext]);
   return (
     <>
       {orderByChecked}
