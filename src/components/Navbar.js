@@ -62,20 +62,22 @@ const Navbar = ({ search }, ...props) => {
       });
   };
 
-  const searchIcon = ()=> 
-    {
-      if (location.pathname !== '/explore')
-        {
-          console.log('1');
-        return <Link to="/explore" className="fas fa-search" onClick={() => search(searchText)}></Link>
-        }
-        else 
-        {
-          console.log('0');
-          return  <i className="fas fa-search" onClick={() => search(searchText)}/>
-        }
-      }
-  
+  const searchIcon = () => {
+    if (location.pathname !== "/explore") {
+      console.log("1");
+      return (
+        <Link
+          to="/explore"
+          className="fas fa-search"
+          onClick={() => search(searchText)}
+        ></Link>
+      );
+    } else {
+      console.log("0");
+      return <i className="fas fa-search" onClick={() => search(searchText)} />;
+    }
+  };
+
   return (
     <nav className="navBarItems">
       <h1 className="title-nav">BookNerds</h1>
@@ -90,7 +92,7 @@ const Navbar = ({ search }, ...props) => {
           onChange={(e) => setSearchText(e.target.value)}
         />
         <a className="search-btn" href="#">
-        {searchIcon()}
+          {searchIcon()}
         </a>
       </div>
 
@@ -98,11 +100,6 @@ const Navbar = ({ search }, ...props) => {
         <Link to="/" className="home-nav">
           Home
         </Link>
-        {currentUser && (
-          <Link to="/mybooks" className="mybooks-nav">
-            MyBooks
-          </Link>
-        )}
         <Link to="/explore" className="explore-nav">
           Explore
         </Link>

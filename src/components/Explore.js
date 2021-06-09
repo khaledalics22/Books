@@ -152,12 +152,13 @@ const Explore = ({ history, searchText }) => {
       </ul>
     </div>
   );
-  let [searchtext] = useState(searchText || "");
+  let [searchtext, setSearchText] = useState(searchText || "");
 
   useEffect(() => {
+    setSearchText(searchText);
     getCategory();
     getBooks(orderBy, searchtext, "");
-  }, []);
+  }, [searchtext, searchText]);
   return (
     <>
       {orderByChecked}
