@@ -33,6 +33,18 @@
 .text-container h4{
     margin: 0px;
     padding: 0px;
+    padding-bottom: 10px;
+}
+
+.category-label{
+    display: inline-block;
+    margin: 0;
+    margin-right: 15px;
+}
+
+.book-category{
+    display: inline-block;
+    margin:0;
     padding-bottom: 20px;
 }
 
