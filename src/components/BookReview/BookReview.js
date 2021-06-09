@@ -28,6 +28,7 @@ const BookReview = ({ history }) => {
       .then((book) => {
         console.log(book.data());
         setBook(book.data());
+        setRating(book.data().rating);
       })
       .catch((err) => {
         console.error(err);
@@ -56,7 +57,6 @@ const BookReview = ({ history }) => {
       .get()
       .then((book) => {
         setBook(book.data());
-        setRating(book.data().rating);
 
         db.collection("user")
           .doc(currentUser.uid)

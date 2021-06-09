@@ -130,6 +130,7 @@ export default function Profile({ history }) {
         const books = [];
         result.forEach((doc) => {
           books.push({
+            book_id: doc.data().book_id,
             title: doc.data()?.title,
             description: doc.data()?.description,
             author_name: doc.data()?.author_name,
