@@ -5,14 +5,12 @@ import { Link } from "react-router-dom";
 import Navbar from "./Navbar";
 import { AuthConext } from "./firebase/auth.js";
 import HomeBook from "./HomeBook";
-
 const orders = [
   { Name: "Likes", order: "likes" },
   { Name: "Title", order: "title" },
   { Name: "Author Name", order: "author_name" },
   { Name: "Rating", order: "rating" },
 ];
-
 const Explore = ({ history }) => {
   const { currentUser } = useContext(AuthConext);
   const db = app.firestore();
@@ -126,20 +124,24 @@ const Explore = ({ history }) => {
       if (item === true) setOrderBy(orders[index].order);
     });
   };
+
   let [orderBy, setOrderBy] = useState("title");
+
   const orderByChecked = (
     <div className="checkBoxes">
       <label>Order By</label>
       <ul>
-        {orders.map(({ Name, order }, index) => {
-          <li key={index}>
-            <input
-              onChange={() => handleOnChange(index)}
-              checked={checkedState[index]}
-              type="checkbox"
-            />
-            {Name}
-          </li>;
+        {orders.map((order, index) => {
+          return (
+            <li key={index}>
+              <input
+                onChange={() => handleOnChange(index)}
+                checked={checkedState[index]}
+                type="checkbox"
+              />
+              {order.Name}
+            </li>
+          );
         })}
       </ul>
     </div>
@@ -154,16 +156,16 @@ const Explore = ({ history }) => {
     getBooks("title", "", "");
   }, []);
   return (
-    <render>
+    <>
       <Navbar
         history={history}
         currentUser={currentUser}
         search={onClickSearch}
       />
-      {categoriesList}
-      {booksList}
       {orderByChecked}
-    </render>
+      {booksList}
+      {categoriesList}
+    </>
   );
 };
 
