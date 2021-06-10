@@ -1,0 +1,24 @@
+{
+  "files": {
+    "main.css": "/Books/static/css/main.ab45816f.chunk.css",
+    "main.js": "/Books/static/js/main.5ff94dd8.chunk.js",
+    "main.js.map": "/Books/static/js/main.5ff94dd8.chunk.js.map",
+    "runtime-main.js": "/Books/static/js/runtime-main.c83199c6.js",
+    "runtime-main.js.map": "/Books/static/js/runtime-main.c83199c6.js.map",
+    "static/js/2.840e1c9f.chunk.js": "/Books/static/js/2.840e1c9f.chunk.js",
+    "static/js/2.840e1c9f.chunk.js.map": "/Books/static/js/2.840e1c9f.chunk.js.map",
+    "static/js/3.ee748dad.chunk.js": "/Books/static/js/3.ee748dad.chunk.js",
+    "static/js/3.ee748dad.chunk.js.map": "/Books/static/js/3.ee748dad.chunk.js.map",
+    "index.html": "/Books/index.html",
+    "static/css/main.ab45816f.chunk.css.map": "/Books/static/css/main.ab45816f.chunk.css.map",
+    "static/js/2.840e1c9f.chunk.js.LICENSE.txt": "/Books/static/js/2.840e1c9f.chunk.js.LICENSE.txt",
+    "static/media/logo.6ce24c58.svg": "/Books/static/media/logo.6ce24c58.svg",
+    "static/media/user-circle-solid.da970b88.svg": "/Books/static/media/user-circle-solid.da970b88.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.c83199c6.js",
+    "static/js/2.840e1c9f.chunk.js",
+    "static/css/main.ab45816f.chunk.css",
+    "static/js/main.5ff94dd8.chunk.js"
+  ]
+}
